@@ -31,8 +31,9 @@ module register_general(
                 reg_array[reg_write_dest] <= reg_write_data;  
             end
         end
+        assign reg_read_data_1 = reg_array[reg_read_addr_1];  
+        assign reg_read_data_2 = reg_array[reg_read_addr_2];  
     end
 
-    assign reg_read_data_1 = reg_array[reg_read_addr_1];  
-    assign reg_read_data_2 = reg_array[reg_read_addr_2];  
+    
  endmodule   
