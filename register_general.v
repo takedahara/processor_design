@@ -1,4 +1,4 @@
-module register_general(
+module register_general( // 
     input clk,
     input rst,
     //　データを書き込む
@@ -16,7 +16,7 @@ module register_general(
 
     reg     [15:0] reg_array [7:0]; // 8 registers
 
-    always @ (posedge clk or negedge rst) begin  
+    always @ (posedge clk or negedge rst) begin  // 書き込むは順序回路
         if(rst == 1'b0) begin // 全てのデータを削除
             reg_array[0] <= 16'b0;  
             reg_array[1] <= 16'b0;  
@@ -31,9 +31,11 @@ module register_general(
                 reg_array[reg_write_dest] <= reg_write_data;  
             end
         end
-        assign reg_read_data_1 = reg_array[reg_read_addr_1];  
-        assign reg_read_data_2 = reg_array[reg_read_addr_2];  
+        
     end
+
+    assign reg_read_data_1 = reg_array[reg_read_addr_1];  // 読み出すは組み合わせ回路
+    assign reg_read_data_2 = reg_array[reg_read_addr_2];  
 
     
  endmodule   
