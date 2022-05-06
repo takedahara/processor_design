@@ -16,10 +16,10 @@ module alu_control_unit(alu_control_unit_e, instruction_six, ALU_Cnt);
             6'b110010: ALU_Cnt=4'0010;
             6'b110011: ALU_Cnt=4'0011;
             6'b110100: ALU_Cnt=4'0100;
-            6'b110101: ALU_Cnt=4'0101;
+            6'b110101: ALU_Cnt=4'0001; // CMP --> SUB
             6'b110110: ALU_Cnt=4'0110;
             6'b110111: ALU_Cnt=4'0111;
-            6'b111000: ALU_Cnt=4'1000;
+            6'b111000: ALU_Cnt=4'1000; // Shift
             6'b111001: ALU_Cnt=4'1001;
             6'b111010: ALU_Cnt=4'1010;
             6'b111011: ALU_Cnt=4'1011;
