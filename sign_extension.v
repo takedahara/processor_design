@@ -3,7 +3,7 @@ module sign_extension(sign_e, d, result);
     output reg [15:0] result;
     
     always @( posedge sign_e ) begin
-        result[15:0] <= { 8{d[7]}, d[7:0] };
+        result[15:0] <= { {8{d[7]}}, d };
     end
 
 endmodule
