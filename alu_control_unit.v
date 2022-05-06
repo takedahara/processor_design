@@ -3,7 +3,7 @@ module alu_control_unit(alu_control_unit_e, instruction_six, ALU_Cnt);
     input [5:0] instruction_six; //命令最初の６ビット
     output reg [3:0] ALU_Cnt;
     
-    always @(alu_control_unit_e) begin
+    always @(posedge alu_control_unit_e) begin
         casex (instruction_six)
             6'b00xxxx: ALU_Cnt=4'b0000; // load --> add
             6'b01xxxx: ALU_Cnt=4'b0000; // store --> add
