@@ -1,7 +1,9 @@
-module sign_extension(d, result);
+module sign_extension(sign_e, d, result);
     input [7:0] d;
-    output [15:0] result;
+    output reg [15:0] result;
     
-    assign result = { 8{d[7]}, d };
+    always @( posedge sign_e ) begin
+        result[15:0] <= { 8{d[7]}, d[7:0] };
+    end
 
 endmodule
