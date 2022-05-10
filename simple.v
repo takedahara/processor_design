@@ -1,8 +1,14 @@
-module simple(clk,rst);
+module simple(clk,rst,meirei,in,out);
 	input clk;
 	input rst;
+	input[15:0] meirei;
+	input[15:0]in;
+	output[15:0]out;
+	reg[2:0]cnt=3'b000;
+	
+	
 	wire ar_e,br_e,dr_e,mr_e,ir_e,S,Z,C,V,
-	pc_e,mem_e,mem_w,m1_s,m2_s,m3_s,m4_s,m5_s,m6_s,reg_write,reg_read;
+	mem_e,mem_w,m1_s,m2_s,m3_s,m4_s,m5_s,m6_s,reg_write,reg_read;
 	wire [3:0] ALU_Cnt; //alu opcode
 	wire[5:0] instruction_six;
 	wire [15:0] ar; //AR content
@@ -22,15 +28,34 @@ module simple(clk,rst);
 	wire[15:0] mem_out2; //roadmeirei P4
 	wire [15:0] address;
 	wire [15:0] alu_out;
-	
-	control_unit control_unit_0(.clk(clk), .rst(rst),.exec(exec).S(S),.Z(Z),C(C),
-	.V(V),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
-	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e)
-	,.genr_w(genr_w),.pc_e(pc_e),.mem_e(mem_e)
+	reg[15:0] MEI;
+	reg pc_e;
+	wire[15:0]out;
+	always@(posedge clk)begin
+		if(rst)begin
+			cnt<=3'b101;
+		
+		end else begin
+			
+			pc_e<=1'b0;
+			cnt<=cnt+3'b001;
+			if(cnt==3'b100)begin
+				cnt<=3'b000;
+				pc_e<=1'b1;
+				MEI<=meirei;
+				
+			end
+		end
+	end	
+	control controls(.clk(clk),.rst(rst),.S(S),.Z(Z),.C(C),
+	.V(V),.meirei(MEI),.ar_e(ar_e)
+	,.br_e(br_e),.dr_e(dr_e),.mr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e)
+	,.mem_e(mem_e)
 	,.mem_w(mem_w) ,.m1_s(m1_s),.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
-	,.m5_s(m5_s),.m6_s(m6_s),.alu_instruction(alu_instruction));
+	,.m5_s(m5_s),.m6_s(m6_s),.alu_opcode(alu_instruction));
 	
-	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1)
+	
+	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(MEI)
 	, .reg_out(ir));
 	
 	register_16 AR(.reg_e(clk), .reg_write_en(ar_e), .reg_in(m2)
@@ -42,13 +67,13 @@ module simple(clk,rst);
 	register_16 DR(.reg_e(clk), .reg_write_en(dr_e), .reg_in(alu_out)
 	, .reg_out(dr));
 	
-	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(mem_out)
+	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(m7)
 	,.reg_out(mdr));
 	
 	register_general(.clk(clk),.rst(rst),
 	.reg_write_en(reg_e)
-	,.reg_write_dest(m5),.reg_write_data(m4),.reg_read_addr_1(ir[13:11])
-	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2
+	,.reg_write_dest(m5),.reg_write_data(m4),.reg_read_addr_1(MEI[13:11])
+	,.reg_read_data_1(re0),.reg_read_addr_2(MEI[10:8]),.reg_read_data_2
 	(re1));
 	
 	alu_control_unit aluconu(.alu_control_unit_e(aluc_e)
@@ -58,13 +83,13 @@ module simple(clk,rst);
 	,. alu_in_a(ar), .alu_in_b(br), .alu_out(alu_out), .S(S),.Z(Z)
 	,.C(C),.V(V));
 	
-	wrapper_memory memory_0(.clk_2(clk_2),.mem_e(mem_e),.mem_w(mem_w),
+	ram memory_0(.clk_2(clk_2),.mem_e(mem_e),.mem_w(mem_w),
 	.mem_address(m6),.mem_in(dr),.mem_out(mem_out));
 	
 	program_counter pc_0(.pc_e(pc_e),.rst(rst),.pc_in(m2),.pc_out(pc),
 	.pc_inc_out(pc_inc));
 	
-	sign_extention siex(.d(ir[7:0]),.result(exd));
+	sign_extension siex(.d(ir[7:0]),.result(exd));
 	
 	multiplexer_16 m1_0(.mux_s(m1_s),.mux_in_a(m4),.mux_in_b(pc_inc)
 	,.mux_out(m1));
@@ -78,10 +103,20 @@ module simple(clk,rst);
 	multiplexer_16 m4_0(.mux_s(m4_s),.mux_in_a(dr),.mux_in_b(mdr)
 	,.mux_out(m4));
 	
-	multiplexer_16 m5_0(.mux_s(m5_s),.mux_in_a(ir[13:11]),.mux_in_b(ir[10:8])
+	multiplexer_16 m5_0(.mux_s(m5_s),.mux_in_a(MEI[13:11]),.mux_in_b(MEI[10:8])
 	,.mux_out(m5));
 	
 	multiplexer_16 m6_0(.mux_s(m6_s),.mux_in_a(pc),.mux_in_b(dr)
 	,.mux_out(m6));
 	
+	multiplexer_16 m7_0(.mux_s(m7_s),.mux_in_a(mem_out),.mux_in_b(in)
+	,.mux_out(m7));
+	
+
+	assign out=ar;
+	
 	endmodule
+
+
+
+
