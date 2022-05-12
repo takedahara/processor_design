@@ -1,5 +1,4 @@
 module control_combination(rst,exec, p0,
-                phase //top levelお願い
 				S,Z,C,V,
 				instruction,
 				aluc_e,
@@ -12,7 +11,6 @@ module control_combination(rst,exec, p0,
                 alu_instruction,
                 stop_flag);//top levelお願い
 	input rst, exec, p0; // exec is 0 by default; p0 represents if at p0
-    input [2:0] phase; // a number from 0 to 5
 	input S, Z, C, V;
 	input [15:0] instruction;
 	output reg	aluc_e,
@@ -23,14 +21,18 @@ module control_combination(rst,exec, p0,
 				mem_e, mem_w, 
 				m1_s,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
 	output [5:0] alu_instruction; // ALU制御部へ
-    output reg  stop flag; // if stop_flag == 1, then stop after this instruction
-
-    reg executing = 0; // 実行中・停止中を表す
+    output reg  stop_flag; // if stop_flag == 1, then stop after this instruction
+	 
+	 wire [1:0] op = instruction[15:14];
+	 wire [2:0] r1 = instruction[13:11];
+	 wire [2:0] r2 = instruction[10:8];
+	 wire [3:0] alu_op = instruction[7:4];
+	 reg [4:0] command;
 
     always @(*) begin
         // set the value of "command" depending on the instruction
         case(op)
-            2'b11: command <= {0,alu_op}; // ALU
+            2'b11: command <= {1'b0,alu_op}; // ALU
             2'b00: command <= 5'b10000; //LD  r[Ra]=*(r[Rb]+sign_ext(d))
             2'b01: command <= 5'b10001; //ST  *(r[Rb]+sign_ext(d))=r[Ra]
             2'b10: begin
