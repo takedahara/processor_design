@@ -1,4 +1,4 @@
-module control_combination(rst,exec,
+module control_combination(rst,exec, p0,
                 phase //top levelお願い
 				S,Z,C,V,
 				instruction,
@@ -11,7 +11,7 @@ module control_combination(rst,exec,
 				m1_s,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
                 alu_instruction,
                 stop_flag);//top levelお願い
-	input rst, exec; // exec is 0 by default
+	input rst, exec, p0; // exec is 0 by default; p0 represents if at p0
     input [2:0] phase; // a number from 0 to 5
 	input S, Z, C, V;
 	input [15:0] instruction;
@@ -70,7 +70,7 @@ module control_combination(rst,exec,
             m7_s   <= 0;
             m8_s   <= 0;
 
-            if (rst) begin
+            if (rst || p0) begin // if reset or at phase 0
                 aluc_e <= 0;
                 ar_e   <= 0;
                 br_e   <= 0;
