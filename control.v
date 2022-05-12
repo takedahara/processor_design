@@ -7,7 +7,7 @@ module control(clk,rst,exec,
 				genr_w,
 				pc_e,
 				mem_e, mem_w,
-				m1_s,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
+				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
 				alu_instruction);
 	input clk, rst, exec; // exec is 0 by default
 	input S, Z, C, V;
@@ -18,7 +18,7 @@ module control(clk,rst,exec,
 				genr_w, 
 				pc_e,
 				mem_e, mem_w, 
-				m1_s,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
 	output [5:0] alu_instruction; // ALU制御部へ
 
 	reg executing = 0; // 実行中・停止中を表す
@@ -87,7 +87,7 @@ module control(clk,rst,exec,
                 pc_e   <= 0;
                 mem_e  <= 0;
                 mem_w  <= 0;
-                m1_s   <= 0;
+                jump   <= 0;
                 m2_s   <= 0;
                 m3_s   <= 0;
                 m4_s   <= 0;
@@ -109,7 +109,7 @@ module control(clk,rst,exec,
                 pc_e   <= 1; // update PC
                 mem_e  <= 1; // read from memory
                 mem_w  <= 0;
-                m1_s   <= 0;
+                jump   <= 0;
                 m2_s   <= 0;
                 m3_s   <= 0;
                 m4_s   <= 0;
@@ -134,7 +134,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -155,7 +155,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1; // d
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -176,7 +176,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -197,7 +197,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0; // read Ra into AR
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -219,7 +219,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -240,7 +240,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1; // d
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -261,7 +261,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1; // d
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -282,7 +282,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0; // PC+1
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1; // d
                         m3_s   <= 1; // read PC+1
                         m4_s   <= 0;
@@ -310,7 +310,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -331,7 +331,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -351,7 +351,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -372,7 +372,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -393,7 +393,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -415,7 +415,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -436,7 +436,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1; // outputs d to ALU
                         m3_s   <= 0; // outputs Rb to ALU
                         m4_s   <= 0;
@@ -457,7 +457,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1; // outputs d to ALU
                         m3_s   <= 0; // outputs Rb to ALU
                         m4_s   <= 0;
@@ -478,7 +478,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -500,7 +500,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 1;
                         m3_s   <= 1;
                         m4_s   <= 0;
@@ -530,7 +530,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -551,7 +551,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -572,7 +572,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -594,7 +594,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -615,7 +615,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 1;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -636,7 +636,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 1;
                         mem_w  <= 1;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -659,7 +659,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -687,7 +687,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0; // write DR
@@ -708,7 +708,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -729,7 +729,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0; // write DR
@@ -750,7 +750,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 1;
@@ -771,7 +771,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -793,7 +793,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -814,7 +814,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 1; // Read from main memory
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 1;
@@ -835,7 +835,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 1; // write into main memory
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -856,7 +856,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;
@@ -878,7 +878,7 @@ module control(clk,rst,exec,
                         pc_e   <= 0;
                         mem_e  <= 0;
                         mem_w  <= 0;
-                        m1_s   <= 0;
+                        jump   <= 0;
                         m2_s   <= 0;
                         m3_s   <= 0;
                         m4_s   <= 0;

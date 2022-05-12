@@ -7,10 +7,10 @@ module control_combination(rst,exec, phase,
 				genr_w,
 				//pc_e,
 				mem_e, mem_w,
-				m1_s,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
+				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
                 alu_instruction,
                 stop_flag);//top levelお願い
-	input rst, exec; // exec is 0 by default; p0 represents if at p0
+	input rst, exec; // exec is 0 by default
     input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
@@ -20,7 +20,7 @@ module control_combination(rst,exec, phase,
 				genr_w, 
 				//pc_e,
 				mem_e, mem_w, 
-				m1_s,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
 	 wire [1:0] op = instruction[15:14];
@@ -68,7 +68,7 @@ module control_combination(rst,exec, phase,
             // pc_e   <= 0;
             mem_e  <= 0;
             mem_w  <= 0;
-            m1_s   <= 0;
+            jump   <= 0;
             m2_s   <= 0;
             m3_s   <= 0;
             m4_s   <= 0;
@@ -89,7 +89,7 @@ module control_combination(rst,exec, phase,
                 // pc_e   <= 0;
                 mem_e  <= 0;
                 mem_w  <= 0;
-                m1_s   <= 0;
+                jump   <= 0;
                 m2_s   <= 0;
                 m3_s   <= 0;
                 m4_s   <= 0;
@@ -113,7 +113,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 1; // PC+1
+                    jump   <= 1; // PC+1
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -134,7 +134,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 0;
                     mem_e  <= 0;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -155,7 +155,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 0;
                     mem_e  <= 0;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -176,7 +176,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -197,7 +197,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 1;
@@ -218,7 +218,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -239,7 +239,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 0;
                     mem_e  <= 0;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -260,7 +260,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -281,7 +281,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 1;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -302,7 +302,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -323,7 +323,7 @@ module control_combination(rst,exec, phase,
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    m1_s   <= 0;
+                    jump   <= 0;
                     m2_s   <= 1;
                     m3_s   <= 1;
                     m4_s   <= 0;
