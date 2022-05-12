@@ -21,13 +21,17 @@ module control_combination(rst,exec, p0,
 				mem_e, mem_w, 
 				m1_s,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
 	output [5:0] alu_instruction; // ALU制御部へ
-    output reg  stop_flag; // if stop_flag == 1, then stop after this instruction
 	 
 	 wire [1:0] op = instruction[15:14];
 	 wire [2:0] r1 = instruction[13:11];
 	 wire [2:0] r2 = instruction[10:8];
 	 wire [3:0] alu_op = instruction[7:4];
 	 reg [4:0] command;
+
+    // set the value of alu_instruction depending on the type of instruction
+    // if(op==2'b11) alu_instruction <= { instruction[15:14], instruction[7:4] };
+    // else alu_instruction <=  {instruction[15:10]};
+    assign alu_instruction = (op==2'b11) ? { instruction[15:14], instruction[7:4] } : {instruction[15:10]};
 
     always @(*) begin
         // set the value of "command" depending on the instruction
@@ -94,241 +98,242 @@ module control_combination(rst,exec, p0,
                 m8_s   <= 0;
             end
 
-
-        case(command)
-            5'b00000, 5'b00001, 5'b00010, 5'b00011, 5'b00100: begin//ADD, SUB, AND, OR, XOR
-                aluc_e <= 1;
-                ar_e   <= 1;
-                br_e   <= 1;
-                dr_e   <= 1;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 1;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 1; // PC+1
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 1;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b00101: begin//CMP
-                aluc_e <= 1;
-                ar_e   <= 1;
-                br_e   <= 1;
-                dr_e   <= 0;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 0;
-                // pc_e   <= 0;
-                mem_e  <= 0;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 0;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b00110: begin //MOV
-                aluc_e <= 1;
-                ar_e   <= 0;
-                br_e   <= 0;
-                dr_e   <= 0;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 0;
-                // pc_e   <= 0;
-                mem_e  <= 0;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 1;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b01000, 5'b01001, 5'b01010, 5'b01011: begin //SLL, SLR, SRL, SRA
-                aluc_e <= 1;
-                ar_e   <= 0;
-                br_e   <= 1;
-                dr_e   <= 1;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 1;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 1; // d
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 1;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b01100: begin //IN
-                aluc_e <= 0;
-                ar_e   <= 0;
-                br_e   <= 0;
-                dr_e   <= 0;
-                mdr_e  <= 1;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 1;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 1;
-                m5_s   <= 1;
-                m6_s   <= 0;
-                m7_s   <= 1;
-                m8_s   <= 0;
-                end
-            5'b01101: begin //OUT
-                aluc_e <= 0;
-                ar_e   <= 1;
-                br_e   <= 0;
-                dr_e   <= 0;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 0;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 0;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b01111: begin //HLT
-                aluc_e <= 0;
-                ar_e   <= 0;
-                br_e   <= 0;
-                dr_e   <= 0;
-                mdr_e  <= 0;
-                ir_e   <= 0;
-                reg_e  <= 0;
-                genr_w <= 0;
-                // pc_e   <= 0;
-                mem_e  <= 0;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 0;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b10000: begin //LD
-                aluc_e <= 1;
-                ar_e   <= 0;
-                br_e   <= 1;
-                dr_e   <= 1;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 1;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 1; // d
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 0; // Ra
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b10001: begin //ST
-                aluc_e <= 1;
-                ar_e   <= 1;
-                br_e   <= 1;
-                dr_e   <= 1;
-                mdr_e  <= 0;
-                ir_e   <= 0;
-                reg_e  <= 1;
-                genr_w <= 0;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 1;
-                m1_s   <= 0;
-                m2_s   <= 1; // d
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 0;
-                m6_s   <= 1;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
-            5'b10010: begin //LI
-                aluc_e <= 0;
-                ar_e   <= 0;
-                br_e   <= 0;
-                dr_e   <= 0;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 1;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 1;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 1;
-                end
-            5'b10011, 5'b10100, 5'b10101, 5'b10110, 5'b10111: begin //B, BE,BLT, BLE, BNE
-                aluc_e <= 1;
-                ar_e   <= 0;
-                br_e   <= 0;
-                dr_e   <= 1;
-                mdr_e  <= 0;
-                ir_e   <= 1;
-                reg_e  <= 1;
-                genr_w <= 0;
-                // pc_e   <= 1;
-                mem_e  <= 1;
-                mem_w  <= 0;
-                m1_s   <= 0;
-                m2_s   <= 1;
-                m3_s   <= 1;
-                m4_s   <= 0;
-                m5_s   <= 0;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-                end
+        if (p0 == 1'b0)begin
+            case(command)
+                5'b00000, 5'b00001, 5'b00010, 5'b00011, 5'b00100: begin//ADD, SUB, AND, OR, XOR
+                    aluc_e <= 1;
+                    ar_e   <= 1;
+                    br_e   <= 1;
+                    dr_e   <= 1;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 1;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 1; // PC+1
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 1;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b00101: begin//CMP
+                    aluc_e <= 1;
+                    ar_e   <= 1;
+                    br_e   <= 1;
+                    dr_e   <= 0;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 0;
+                    // pc_e   <= 0;
+                    mem_e  <= 0;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 0;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b00110: begin //MOV
+                    aluc_e <= 1;
+                    ar_e   <= 0;
+                    br_e   <= 0;
+                    dr_e   <= 0;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 0;
+                    // pc_e   <= 0;
+                    mem_e  <= 0;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 1;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b01000, 5'b01001, 5'b01010, 5'b01011: begin //SLL, SLR, SRL, SRA
+                    aluc_e <= 1;
+                    ar_e   <= 0;
+                    br_e   <= 1;
+                    dr_e   <= 1;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 1;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 1; // d
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 1;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b01100: begin //IN
+                    aluc_e <= 0;
+                    ar_e   <= 0;
+                    br_e   <= 0;
+                    dr_e   <= 0;
+                    mdr_e  <= 1;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 1;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 1;
+                    m5_s   <= 1;
+                    m6_s   <= 0;
+                    m7_s   <= 1;
+                    m8_s   <= 0;
+                    end
+                5'b01101: begin //OUT
+                    aluc_e <= 0;
+                    ar_e   <= 1;
+                    br_e   <= 0;
+                    dr_e   <= 0;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 0;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 0;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b01111: begin //HLT
+                    aluc_e <= 0;
+                    ar_e   <= 0;
+                    br_e   <= 0;
+                    dr_e   <= 0;
+                    mdr_e  <= 0;
+                    ir_e   <= 0;
+                    reg_e  <= 0;
+                    genr_w <= 0;
+                    // pc_e   <= 0;
+                    mem_e  <= 0;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 0;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b10000: begin //LD
+                    aluc_e <= 1;
+                    ar_e   <= 0;
+                    br_e   <= 1;
+                    dr_e   <= 1;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 1;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 1; // d
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 0; // Ra
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b10001: begin //ST
+                    aluc_e <= 1;
+                    ar_e   <= 1;
+                    br_e   <= 1;
+                    dr_e   <= 1;
+                    mdr_e  <= 0;
+                    ir_e   <= 0;
+                    reg_e  <= 1;
+                    genr_w <= 0;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 1;
+                    m1_s   <= 0;
+                    m2_s   <= 1; // d
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 0;
+                    m6_s   <= 1;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
+                5'b10010: begin //LI
+                    aluc_e <= 0;
+                    ar_e   <= 0;
+                    br_e   <= 0;
+                    dr_e   <= 0;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 1;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 0;
+                    m3_s   <= 0;
+                    m4_s   <= 0;
+                    m5_s   <= 1;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 1;
+                    end
+                5'b10011, 5'b10100, 5'b10101, 5'b10110, 5'b10111: begin //B, BE,BLT, BLE, BNE
+                    aluc_e <= 1;
+                    ar_e   <= 0;
+                    br_e   <= 0;
+                    dr_e   <= 1;
+                    mdr_e  <= 0;
+                    ir_e   <= 1;
+                    reg_e  <= 1;
+                    genr_w <= 0;
+                    // pc_e   <= 1;
+                    mem_e  <= 1;
+                    mem_w  <= 0;
+                    m1_s   <= 0;
+                    m2_s   <= 1;
+                    m3_s   <= 1;
+                    m4_s   <= 0;
+                    m5_s   <= 0;
+                    m6_s   <= 0;
+                    m7_s   <= 0;
+                    m8_s   <= 0;
+                    end
             default: begin end
         endcase
+        end
     end
 
 
