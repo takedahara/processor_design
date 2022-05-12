@@ -1,6 +1,5 @@
 module alu( opcode,d, alu_in_a, alu_in_b, alu_out, S,Z,C,V);
 	
-	
 	input [3:0] opcode;
 	input [15:0] alu_in_a;
 	input [15:0] alu_in_b;
@@ -11,18 +10,17 @@ module alu( opcode,d, alu_in_a, alu_in_b, alu_out, S,Z,C,V);
 
 	output C;
 	output V;
-   
 	
 	wire [16:0] SUM;
 	wire [16:0] SUB;
 	wire [15:0] AND;
 	wire [15:0] OR;
 	wire [15:0] XOR;
-	function [15:0]shifter;
+
+	function [15:0]SLR;
 		input [15:0] alu_in_a;
 		
-		input [3:0] D;
-		input [3:0] ops;
+		input [3:0] D; // d 4 bit takes values 0 to 16
 		begin
 			case(D)
 				4'b0000:shifter=alu_in_a[15:0];
@@ -56,28 +54,41 @@ module alu( opcode,d, alu_in_a, alu_in_b, alu_out, S,Z,C,V);
 								(opcode==4'b0110) ? alu_in_b:
 								(opcode==4'b0111) ? 16'b0000000000000000:
 								(opcode==4'b1000) ? alu_in_a<<d:
-								(opcode==4'b1001) ? shifter(alu_in_a,d,opcode):
+								(opcode==4'b1001) ? SLR(alu_in_a,d):
 								(opcode==4'b1010) ? alu_in_a>>d:
-								(opcode==4'b1011) ? alu_in_a>>>d:16'b0000000000000000;
+								(opcode==4'b1011) ? alu_in_a>>>d:
+								16'b0000000000000000;
 	
 	assign Z=(alu_out==16'b0000000000000000)? 1'b1:1'b0;
 	assign S=(alu_out[15]==1'b1)?1'b1:1'b0;
-	assign V=(opcode==4'b0000) ? 1'b0://wakranai
-				(opcode==4'b0001) ? 1'b0://wakaranai
+	assign V=(opcode==4'b0000) ? (alu_in_a + alu_in_b)[16]://????
+				(opcode==4'b0001) ? (alu_in_a - alu_in_b)[16]://????
 				(opcode==4'b0010) ? 1'b0:
 				(opcode==4'b0011) ? 1'b0:
 				(opcode==4'b0100) ? 1'b0:
+				(opcode==4'b0101) ? (alu_in_a - alu_in_b)[16]: // CMP
 				(opcode==4'b0110) ? 1'b0:
 				(opcode==4'b0111) ? 1'b0:
-				(opcode==4'b1000) ? 1'b0:
+				(opcode==4'b1000) ? 1'b0: // shift
 				(opcode==4'b1001) ? 1'b0:
 				(opcode==4'b1010) ? 1'b0:
-				(opcode==4'b1011) ? 1'b0:1'b1;
+				(opcode==4'b1011) ? 1'b0:
+				1'b0;
 			
-	assign C=1'b0;
-	
-								
-	
+	assign C=(opcode==4'b0000) ? (alu_in_a + alu_in_b)[16]: //最上位ビットからの桁上げ
+				(opcode==4'b0001) ? (alu_in_a - alu_in_b)[16]:
+				(opcode==4'b0010) ? 1'b0: // AND, OR, XOR結果に関わらず０
+				(opcode==4'b0011) ? 1'b0:
+				(opcode==4'b0100) ? 1'b0:
+				(opcode==4'b0101) ? (alu_in_a - alu_in_b)[16]: // CMP
+				(opcode==4'b0110) ? 1'b0: // MOV
+				(opcode==4'b0111) ? 1'b0: // reserved
+				(opcode==4'b1000) ? alu_in_a[16-d]:
+				(opcode==4'b1001) ? 1'b0: // SLR --> 0
+				(opcode==4'b1010) ? alu_in_a[d-1]:
+				(opcode==4'b1011) ? alu_in_a[d-1]:
+				1'b0;
+
 	endmodule
 	
 	

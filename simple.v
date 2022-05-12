@@ -4,7 +4,6 @@ module simple(clk,rst,meirei,in,out);
 	input[15:0] meirei;
 	input[15:0]in;
 	output[15:0]out;
-	reg[2:0]cnt=3'b000;
 	
 	
 	wire ar_e,br_e,dr_e,mr_e,ir_e,S,Z,C,V,
@@ -31,19 +30,43 @@ module simple(clk,rst,meirei,in,out);
 	reg[15:0] MEI;
 	reg pc_e;
 	wire[15:0]out;
+
+	reg[2:0]cnt=3'b000;
+	reg executing = 0; // 実行中・停止中を表す
+	reg stop_flag = 0; // if stop_flag == 1, then stop after this instruction
+	reg p0 <= 1; // 現在フェーズ０にいるか
+
+
+	// 3'b000: 初期状態, 3'b001: Phase１, 3'b010: Phase 2, ...
 	always@(posedge clk)begin
 		if(rst)begin
-			cnt<=3'b101;
-		
+			cnt <= 3'b000;
+			executing <= 0;
+			p0 <= 1;
 		end else begin
-			
-			pc_e<=1'b0;
-			cnt<=cnt+3'b001;
-			if(cnt==3'b100)begin
-				cnt<=3'b000;
-				pc_e<=1'b1;
-				MEI<=meirei;
-				
+			if (cnt == 3'b000) begin // if Phase 0
+				if ( (executing==0 & exec) || (executing & exec==0) ) begin
+					cnt <= 3'b001;
+					executing <= 1;
+					p0 <= 0;
+				end else begin
+					cnt<= 3'b000; //stay in 初期状態
+				end
+			end
+			if (executing & exec) begin
+				stop_flag <= 1;
+			end
+			pc_e <= 1'b0;
+			cnt <= cnt + 3'b001;
+			if(cnt == 3'b101)begin // if Phase 5
+				if(stop_flag) begin
+					cnt <= 3'b000;
+					executing <= 0;
+				end else begin
+				cnt <= 3'b000;
+				pc_e <= 1'b1;
+				MEI <= meirei;
+				end
 			end
 		end
 	end	

@@ -16,8 +16,8 @@ module register_general( //
 
     reg     [15:0] reg_array [7:0]; // 8 registers
 
-    always @ (posedge clk or negedge rst) begin  // 書き込むは順序回路
-        if(rst == 1'b0) begin // 全てのデータを削除
+    always @ (posedge clk) begin  // 書き込むは順序回路
+        if(rst) begin // 全てのデータを削除
             reg_array[0] <= 16'b0;  
             reg_array[1] <= 16'b0;  
             reg_array[2] <= 16'b0;  

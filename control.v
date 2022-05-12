@@ -19,7 +19,7 @@ module control(clk,rst,exec,
 				pc_e,
 				mem_e, mem_w, 
 				m1_s,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s;
-	output [5:0] alu_instruction; // ALU制御部へ ?? 書く
+	output [5:0] alu_instruction; // ALU制御部へ
 
 	reg executing = 0; // 実行中・停止中を表す
     reg stop_flag = 0; // if stop_flag == 1, then stop after this instruction

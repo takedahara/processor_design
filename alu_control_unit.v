@@ -1,6 +1,6 @@
 module alu_control_unit(alu_control_unit_e, instruction_six, ALU_Cnt);
     input alu_control_unit_e;
-    input [5:0] instruction_six; //命令最初の６ビット
+    input [5:0] instruction_six; //制御部から
     output reg [3:0] ALU_Cnt;
     
     always @(posedge alu_control_unit_e) begin
