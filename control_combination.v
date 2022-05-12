@@ -1,4 +1,4 @@
-module control_combination(rst,exec, p0,
+module control_combination(rst,exec, phase,
 				S,Z,C,V,
 				instruction,
 				aluc_e,
@@ -10,7 +10,8 @@ module control_combination(rst,exec, p0,
 				m1_s,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
                 alu_instruction,
                 stop_flag);//top levelお願い
-	input rst, exec, p0; // exec is 0 by default; p0 represents if at p0
+	input rst, exec; // exec is 0 by default; p0 represents if at p0
+    input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
 	output reg	aluc_e,
@@ -76,7 +77,7 @@ module control_combination(rst,exec, p0,
             m7_s   <= 0;
             m8_s   <= 0;
 
-            if (rst || p0) begin // if reset or at phase 0
+            if (rst || phase == 3'b000) begin // if reset or at phase 0
                 aluc_e <= 0;
                 ar_e   <= 0;
                 br_e   <= 0;
@@ -98,7 +99,7 @@ module control_combination(rst,exec, p0,
                 m8_s   <= 0;
             end
 
-        if (p0 == 1'b0)begin
+        if (phase != 3'b000)begin
             case(command)
                 5'b00000, 5'b00001, 5'b00010, 5'b00011, 5'b00100: begin//ADD, SUB, AND, OR, XOR
                     aluc_e <= 1;
