@@ -1,19 +1,23 @@
-module program_counter(pc_e, rst, pc_in, pc_out, pc_inc_out);
+module program_counter(pc_e, rst,j_flag,j_addr,  pc_out);
 	input 		pc_e;
 	input 		rst;
-	input	[15:0] pc_in;
-	output	[15:0] pc_out;
-	output	[15:0] pc_inc_out;
-	reg	[15:0] pc_out;
+	input j_flag;
+	input[11:0]j_addr;
 	
-	always @(posedge pc_e or negedge rst) begin
-		if(rst == 1'b0) begin
-			pc_out	<= 16'b0000000000000000;
-		end else begin
-			pc_out	<= pc_in;
+	
+	output	[11:0] pc_out;
+	
+	reg	[11:0] pc_out=16'b0000000000000000;
+	
+	always @(posedge pc_e ) begin
+		if(j_flag==1)begin
+			pc_out<=j_addr;
+		end
+		else begin
+		pc_out	<= pc_out+16'b0000000000000001;//pc_inwo16'b1nikaeta
 		end
 	end
 	
-	assign pc_inc_out = pc_out + 16'b0000000000000001;
+	
 	
 endmodule
