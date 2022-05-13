@@ -55,50 +55,50 @@ module control_combination(rst, phase,
             end
         endcase
 
-        // initialisation
-            aluc_e <= 0;
-            ar_e   <= 0;
-            br_e   <= 0;
-            dr_e   <= 0;
-            mdr_e  <= 0;
-            ir_e   <= 0;
-            reg_e  <= 0;
-            genr_w <= 0;
-            // pc_e   <= 0;
-            mem_e  <= 0;
-            mem_w  <= 0;
-            jump   <= 0;
-            m2_s   <= 0;
-            m3_s   <= 0;
-            m4_s   <= 0;
-            m5_s   <= 0;
-            m6_s   <= 0;
-            m7_s   <= 0;
-            m8_s   <= 0;
+        // // initialisation
+        // aluc_e <= 0;
+        // ar_e   <= 0;
+        // br_e   <= 0;
+        // dr_e   <= 0;
+        // mdr_e  <= 0;
+        // ir_e   <= 0;
+        // reg_e  <= 0;
+        // genr_w <= 0;
+        // // pc_e   <= 0;
+        // mem_e  <= 0;
+        // mem_w  <= 0;
+        // jump   <= 0;
+        // m2_s   <= 0;
+        // m3_s   <= 0;
+        // m4_s   <= 0;
+        // m5_s   <= 0;
+        // m6_s   <= 0;
+        // m7_s   <= 0;
+        // m8_s   <= 0;
 
-            if (rst || phase == 3'b000) begin // if reset or at phase 0
-                aluc_e <= 0;
-                ar_e   <= 0;
-                br_e   <= 0;
-                dr_e   <= 0;
-                mdr_e  <= 0;
-                ir_e   <= 0;
-                reg_e  <= 0;
-                genr_w <= 0;
-                // pc_e   <= 0;
-                mem_e  <= 0;
-                mem_w  <= 0;
-                jump   <= 0;
-                m2_s   <= 0;
-                m3_s   <= 0;
-                m4_s   <= 0;
-                m5_s   <= 0;
-                m6_s   <= 0;
-                m7_s   <= 0;
-                m8_s   <= 0;
-            end
+        // if (rst || phase == 3'b000) begin // if reset or at phase 0
+        //     aluc_e <= 0;
+        //     ar_e   <= 0;
+        //     br_e   <= 0;
+        //     dr_e   <= 0;
+        //     mdr_e  <= 0;
+        //     ir_e   <= 0;
+        //     reg_e  <= 0;
+        //     genr_w <= 0;
+        //     // pc_e   <= 0;
+        //     mem_e  <= 0;
+        //     mem_w  <= 0;
+        //     jump   <= 0;
+        //     m2_s   <= 0;
+        //     m3_s   <= 0;
+        //     m4_s   <= 0;
+        //     m5_s   <= 0;
+        //     m6_s   <= 0;
+        //     m7_s   <= 0;
+        //     m8_s   <= 0;
+        // end
 
-        if (phase != 3'b000)begin
+        if (phase != 3'b000 || ~reset)begin
             case(command)
                 5'b00000, 5'b00001, 5'b00010, 5'b00011, 5'b00100: begin//ADD, SUB, AND, OR, XOR
                     aluc_e <= 1;
