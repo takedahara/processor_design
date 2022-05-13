@@ -7,7 +7,7 @@ module simple(clk,rst,exec,meirei,in,out, phase);
 	output[15:0]out;
 	
 	
-	wire ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,
+	wire aluc_e, ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,
 	mem_e,mem_w,m2_s,m3_s,m4_s,m5_s,m6_s,reg_write,reg_read;
 	wire [3:0] ALU_Cnt; //alu opcode
 	wire[5:0] instruction_six;
@@ -70,7 +70,7 @@ module simple(clk,rst,exec,meirei,in,out, phase);
 		end
 	end	
 	control controls(.rst(rst),.S(S),.Z(Z),.C(C),
-	.V(V),.instruction(MEI),.ar_e(ar_e)
+	.V(V),.instruction(MEI),.aluc_e(aluc_e),.ar_e(ar_e)
 	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e)
 	,.mem_e(mem_e)
 	,.mem_w(mem_w) ,.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
@@ -94,7 +94,7 @@ module simple(clk,rst,exec,meirei,in,out, phase);
 	
 	register_general(.clk(clk),.rst(rst),
 	.reg_write_en(reg_e)
-	,.reg_write_dest(m5),.reg_write_data(m4),.reg_read_addr_1(MEI[13:11])
+	,.reg_write_dest(m5),.reg_write_data(m8),.reg_read_addr_1(MEI[13:11])
 	,.reg_read_data_1(re0),.reg_read_addr_2(MEI[10:8]),.reg_read_data_2
 	(re1));
 	
@@ -136,8 +136,10 @@ module simple(clk,rst,exec,meirei,in,out, phase);
 	multiplexer_16 m7_0(.mux_s(m7_s),.mux_in_a(mem_out2),.mux_in_b(in)
 	,.mux_out(m7));
 	
+	multiplexer_16 m8_0(.mux_s(m8_s),.mux_in_a(m4),.mux_in_b(exd)
+	,.mux_out(m8));
 
-	assign out=ar;
+	assign out=m8;
 	
 	endmodule
 
