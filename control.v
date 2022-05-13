@@ -341,7 +341,7 @@ module control(clk,rst,exec,
                         end
                     5'b01000, 5'b01001, 5'b01010, 5'b01011:begin //SLL, SLR, SRL, SRA
                         aluc_e <= 1;
-                        ar_e   <= 0
+                        ar_e   <= 0;
                         br_e   <= 1; // Rbを読み出す
                         dr_e   <= 0; // Result of ALU goes into DR
                         mdr_e  <= 0;

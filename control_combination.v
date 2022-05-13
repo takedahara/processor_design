@@ -1,4 +1,4 @@
-module control_combination(rst,exec, phase,
+module control_combination(rst, phase,
 				S,Z,C,V,
 				instruction,
 				aluc_e,
@@ -8,9 +8,8 @@ module control_combination(rst,exec, phase,
 				//pc_e,
 				mem_e, mem_w,
 				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
-                alu_instruction,
-                stop_flag);//top levelお願い
-	input rst, exec; // exec is 0 by default
+                alu_instruction);
+	input rst;
     input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
