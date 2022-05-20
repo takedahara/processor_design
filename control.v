@@ -1,4 +1,4 @@
-module control(rst, phase,
+module control(rst, phase, // 組み合わせ回路
 				S,Z,C,V,
 				instruction,
 				aluc_e,
@@ -10,7 +10,7 @@ module control(rst, phase,
 				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
                 alu_instruction);
 	input rst;
-   input [2:0] phase;
+    input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
 	output reg	aluc_e,
@@ -331,15 +331,13 @@ module control(rst, phase,
                     end
             default: begin end
         endcase
-		  
-		  if(phase==3'b000||phase==3'b001||
-		  phase==3'b010||phase==3'b011||phase==3'b100)begin
-				genr_w<=0;
-		  end//phase 5notokinomi genr_w wo 1 nisuru
-		  
         end
-    end
 
+        if(phase!=3'b101) begin
+			genr_w<=0;
+		end //phase 5notokinomi genr_w wo 1 nisuru
+
+    end
 
 
 endmodule
