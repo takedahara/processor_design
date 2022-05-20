@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
+=======
+module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	input clk;
 	input rst;
 	input exec;
@@ -9,7 +13,10 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	output[15:0]out3;
 	output[15:0]out4;
 	output[31:0]seg_out;
+<<<<<<< HEAD
 	output seg_sel;
+=======
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	
 	
 	wire aluc_e, ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,jump,
@@ -59,8 +66,13 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 			phase <= phase + 3'b001;
 			if (phase == 3'b000) begin // if Phase 0
 				
+<<<<<<< HEAD
 				if ( (executing==0 & !exec) || (executing & exec) ) begin
 					 // tamesinikuwaeta
+=======
+				if ( (executing==0 & exec) || (executing & exec==0) ) begin
+					MEI<=mem_out1; // tamesinikuwaeta
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 					phase <= 3'b001;
 					executing <= 1;
 				end else begin
@@ -76,13 +88,21 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 				pc_e <= 1'b1;
 			end
 			if(phase == 3'b101)begin // if Phase 5
+<<<<<<< HEAD
 				if(stop_flag ||(executing & !exec)) begin  // ||executing&exec  wo kuwaeta
+=======
+				if(stop_flag ||(executing&exec)) begin  // ||executing&exec  wo kuwaeta
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 					phase <= 3'b000;
 					executing <= 0;
 				end else begin
 				phase <= 3'b001;
 				
+<<<<<<< HEAD
 				
+=======
+				MEI <= meirei; //meirei wo mem_out1
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 				end
 			end
 		end
@@ -113,7 +133,11 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(m7)
 	,.reg_out(mdr));
 	
+<<<<<<< HEAD
 	register_general registerfile(.clk(clk),.rst(!rst),
+=======
+	register_general registerfile(.clk(clk),.rst(rst),
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	.reg_write_en(genr_w)   //reg_e wo genr_w nisita
 	,.reg_write_dest(m5),.reg_write_data(m8),.reg_read_addr_1(ir[13:11])
 	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2  //MEI wo ir nisita
@@ -137,7 +161,11 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	
 	
 	
+<<<<<<< HEAD
 	program_counter pc_0(.pc_e(pc_e),.rst(!rst),.j_flag(jump)
+=======
+	program_counter pc_0(.pc_e(pc_e),.rst(rst),.j_flag(jump)
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	,.j_addr(dr),.pc_out(pc_out));   
 	
 	sign_extension siex(.d(ir[7:0]),.result(exd)); //ir[7:0] wo 8'b00001111
@@ -166,7 +194,11 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=ir;
+<<<<<<< HEAD
 	assign out2=ar; //br wo re1
+=======
+	assign out2=pc_out; //br wo re1
+>>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	assign out3=re0;
 	assign out4=re1;
 	
