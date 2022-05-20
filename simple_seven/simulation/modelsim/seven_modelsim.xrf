@@ -1,7 +1,7 @@
 vendor_name = ModelSim
-source_file = 1, C:/simple_seven/displaydigit.v
-source_file = 1, C:/simple_seven/seven.v
-source_file = 1, C:/simple_seven/db/seven.cbx.xml
+source_file = 1, C:/Users/admin/2022-simple-team04/simple_seven/displaydigit.v
+source_file = 1, C:/Users/admin/2022-simple-team04/simple_seven/seven.v
+source_file = 1, C:/Users/admin/2022-simple-team04/simple_seven/db/seven.cbx.xml
 design_name = seven
 instance = comp, \out[0]~output , out[0]~output, seven, 1
 instance = comp, \out[1]~output , out[1]~output, seven, 1

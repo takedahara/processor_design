@@ -1,4 +1,7 @@
-module register_general( // 
+
+
+
+module register_general(
     input clk,
     input rst,
     //　データを書き込む
@@ -16,26 +19,25 @@ module register_general( //
 
     reg     [15:0] reg_array [7:0]; // 8 registers
 
-    always @ (posedge clk) begin  // 書き込むは順序回路
-        if(rst) begin // 全てのデータを削除
-            reg_array[0] <= 16'b0;  
-            reg_array[1] <= 16'b0;  
-            reg_array[2] <= 16'b0;  
-            reg_array[3] <= 16'b0;  
-            reg_array[4] <= 16'b0;  
-            reg_array[5] <= 16'b0;  
-            reg_array[6] <= 16'b0;  
-            reg_array[7] <= 16'b0;       
-        end else begin  
-            if(reg_write_en) begin  
-                reg_array[reg_write_dest] <= reg_write_data;  
+    always @ (posedge clk ) begin  
+        
+            if(reg_write_en==1'b1) begin  
+                reg_array[reg_write_dest[2]*4+reg_write_dest[1]*2+reg_write_dest[0]] <= reg_write_data;  
             end
+				if(rst==1'b1)begin
+					reg_array[7]<=16'b0000000000000000;
+					reg_array[6]<=16'b0000000000000000;
+					reg_array[5]<=16'b0000000000000000;
+					reg_array[4]<=16'b0000000000000000;
+					reg_array[3]<=16'b0000000000000000;
+					reg_array[2]<=16'b0000000000000000;
+					reg_array[1]<=16'b0000000000000000;
+					reg_array[0]<=16'b0000000000000000;
+				end
         end
         
-    end
-
-    assign reg_read_data_1 = reg_array[reg_read_addr_1];  // 読み出すは組み合わせ回路
-    assign reg_read_data_2 = reg_array[reg_read_addr_2];  
-
     
- endmodule   
+assign reg_read_data_1 = reg_array[reg_read_addr_1];  
+assign reg_read_data_2 = reg_array[reg_read_addr_2];  
+    
+endmodule

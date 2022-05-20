@@ -1,5 +1,5 @@
 EDA Netlist Writer report for seven
-Fri May 20 11:18:52 2022
+Fri May 20 11:34:21 2022
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -36,7 +36,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Fri May 20 11:18:52 2022 ;
+; EDA Netlist Writer Status ; Successful - Fri May 20 11:34:21 2022 ;
 ; Revision Name             ; seven                                 ;
 ; Top-level Entity Name     ; seven                                 ;
 ; Family                    ; Cyclone IV E                          ;
@@ -66,20 +66,20 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+----------------------------------------------------------------------+
-; Simulation Generated Files                                           ;
-+----------------------------------------------------------------------+
-; Generated Files                                                      ;
-+----------------------------------------------------------------------+
-; C:/simple_seven/simulation/modelsim/seven_7_1200mv_100c_slow.vo      ;
-; C:/simple_seven/simulation/modelsim/seven_7_1200mv_-40c_slow.vo      ;
-; C:/simple_seven/simulation/modelsim/seven_min_1200mv_-40c_fast.vo    ;
-; C:/simple_seven/simulation/modelsim/seven.vo                         ;
-; C:/simple_seven/simulation/modelsim/seven_7_1200mv_100c_v_slow.sdo   ;
-; C:/simple_seven/simulation/modelsim/seven_7_1200mv_-40c_v_slow.sdo   ;
-; C:/simple_seven/simulation/modelsim/seven_min_1200mv_-40c_v_fast.sdo ;
-; C:/simple_seven/simulation/modelsim/seven_v.sdo                      ;
-+----------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                          ;
++-----------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                     ;
++-----------------------------------------------------------------------------------------------------+
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_7_1200mv_100c_slow.vo      ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_7_1200mv_-40c_slow.vo      ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_min_1200mv_-40c_fast.vo    ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven.vo                         ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_7_1200mv_100c_v_slow.sdo   ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_7_1200mv_-40c_v_slow.sdo   ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_min_1200mv_-40c_v_fast.sdo ;
+; C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/seven_v.sdo                      ;
++-----------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -88,20 +88,20 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Fri May 20 11:18:49 2022
+    Info: Processing started: Fri May 20 11:34:18 2022
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off seven -c seven
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (204019): Generated file seven_7_1200mv_100c_slow.vo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven_7_1200mv_-40c_slow.vo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven_min_1200mv_-40c_fast.vo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven.vo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven_7_1200mv_100c_v_slow.sdo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven_7_1200mv_-40c_v_slow.sdo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven_min_1200mv_-40c_v_fast.sdo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file seven_v.sdo in folder "C:/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_7_1200mv_100c_slow.vo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_7_1200mv_-40c_slow.vo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_min_1200mv_-40c_fast.vo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven.vo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_7_1200mv_100c_v_slow.sdo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_7_1200mv_-40c_v_slow.sdo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_min_1200mv_-40c_v_fast.sdo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file seven_v.sdo in folder "C:/Users/admin/2022-simple-team04/simple_seven/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4644 megabytes
-    Info: Processing ended: Fri May 20 11:18:52 2022
+    Info: Peak virtual memory: 4642 megabytes
+    Info: Processing ended: Fri May 20 11:34:21 2022
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 

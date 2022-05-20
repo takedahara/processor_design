@@ -9,5 +9,4 @@ module register_16(reg_e, reg_write_en, reg_in, reg_out);
             reg_out <= reg_in;
             end
 	end
-	
 endmodule

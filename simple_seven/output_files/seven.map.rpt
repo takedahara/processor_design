@@ -1,5 +1,5 @@
 Analysis & Synthesis report for seven
-Fri May 20 11:18:12 2022
+Fri May 20 11:33:51 2022
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -42,7 +42,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri May 20 11:18:12 2022       ;
+; Analysis & Synthesis Status        ; Successful - Fri May 20 11:33:51 2022       ;
 ; Quartus Prime Version              ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; seven                                       ;
 ; Top-level Entity Name              ; seven                                       ;
@@ -161,14 +161,14 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                 ;
-+----------------------------------+-----------------+------------------------+--------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path   ; Library ;
-+----------------------------------+-----------------+------------------------+--------------------------------+---------+
-; displaydigit.v                   ; yes             ; User Verilog HDL File  ; C:/simple_seven/displaydigit.v ;         ;
-; seven.v                          ; yes             ; User Verilog HDL File  ; C:/simple_seven/seven.v        ;         ;
-+----------------------------------+-----------------+------------------------+--------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                  ; Library ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------+---------+
+; displaydigit.v                   ; yes             ; User Verilog HDL File  ; C:/Users/admin/2022-simple-team04/simple_seven/displaydigit.v ;         ;
+; seven.v                          ; yes             ; User Verilog HDL File  ; C:/Users/admin/2022-simple-team04/simple_seven/seven.v        ;         ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------+---------+
 
 
 +------------------------------------------------------------+
@@ -264,21 +264,21 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Fri May 20 11:17:51 2022
+    Info: Processing started: Fri May 20 11:33:31 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off seven -c seven
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file displaydigit.v
-    Info (12023): Found entity 1: displaydigit File: C:/simple_seven/displaydigit.v Line: 1
+    Info (12023): Found entity 1: displaydigit File: C:/Users/admin/2022-simple-team04/simple_seven/displaydigit.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file seven.v
-    Info (12023): Found entity 1: seven File: C:/simple_seven/seven.v Line: 1
+    Info (12023): Found entity 1: seven File: C:/Users/admin/2022-simple-team04/simple_seven/seven.v Line: 1
 Info (12127): Elaborating entity "seven" for the top level hierarchy
-Info (12128): Elaborating entity "displaydigit" for hierarchy "displaydigit:digit1" File: C:/simple_seven/seven.v Line: 11
+Info (12128): Elaborating entity "displaydigit" for hierarchy "displaydigit:digit1" File: C:/Users/admin/2022-simple-team04/simple_seven/seven.v Line: 11
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "out[0]" is stuck at GND File: C:/simple_seven/seven.v Line: 4
-    Warning (13410): Pin "out[8]" is stuck at GND File: C:/simple_seven/seven.v Line: 4
-    Warning (13410): Pin "out[16]" is stuck at GND File: C:/simple_seven/seven.v Line: 4
-    Warning (13410): Pin "out[24]" is stuck at GND File: C:/simple_seven/seven.v Line: 4
+    Warning (13410): Pin "out[0]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple_seven/seven.v Line: 4
+    Warning (13410): Pin "out[8]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple_seven/seven.v Line: 4
+    Warning (13410): Pin "out[16]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple_seven/seven.v Line: 4
+    Warning (13410): Pin "out[24]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple_seven/seven.v Line: 4
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -287,9 +287,9 @@ Info (21057): Implemented 105 device resources after synthesis - the final resou
     Info (21059): Implemented 32 output pins
     Info (21061): Implemented 56 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4743 megabytes
-    Info: Processing ended: Fri May 20 11:18:12 2022
-    Info: Elapsed time: 00:00:21
-    Info: Total CPU time (on all processors): 00:00:43
+    Info: Peak virtual memory: 4736 megabytes
+    Info: Processing ended: Fri May 20 11:33:51 2022
+    Info: Elapsed time: 00:00:20
+    Info: Total CPU time (on all processors): 00:00:41
 
 
