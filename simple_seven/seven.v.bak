@@ -1,6 +1,0 @@
-module seven(in, signal, out);
-	input [15:0] in; // from ar 
-	input signal;
-	output [31:0] out; // to 7segLED
-	
-	
