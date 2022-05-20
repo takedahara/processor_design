@@ -1,4 +1,4 @@
-module control(rst, phase, // 組み合わせ回路
+module control(rst, phase,
 				S,Z,C,V,
 				instruction,
 				aluc_e,
@@ -7,10 +7,10 @@ module control(rst, phase, // 組み合わせ回路
 				genr_w,
 				//pc_e,
 				mem_e, mem_w,
-				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,
+				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,
                 alu_instruction);
 	input rst;
-    input [2:0] phase;
+   input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
 	output reg	aluc_e,
@@ -19,7 +19,7 @@ module control(rst, phase, // 組み合わせ回路
 				genr_w, 
 				//pc_e,
 				mem_e, mem_w, 
-				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s;
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
 	 wire [1:0] op = instruction[15:14];
@@ -75,6 +75,7 @@ module control(rst, phase, // 組み合わせ回路
         m6_s   <= 0;
         m7_s   <= 0;
         m8_s   <= 0;
+		  out_s<=0;
 
         if (rst || phase == 3'b000) begin // if reset or at phase 0
             aluc_e <= 0;
@@ -110,7 +111,7 @@ module control(rst, phase, // 組み合わせ回路
                     // pc_e   <= 1;
                     mem_e  <= 1;
                     mem_w  <= 0;
-                    jump   <= 1; // PC+1
+                    jump   <= 0; // PC+1
                     m2_s   <= 0;
                     m3_s   <= 0;
                     m4_s   <= 0;
@@ -223,6 +224,7 @@ module control(rst, phase, // 組み合わせ回路
                     m6_s   <= 0;
                     m7_s   <= 0;
                     m8_s   <= 0;
+						  out_s<=1;
                     end
                 5'b01111: begin //HLT
                     aluc_e <= 0;
@@ -250,7 +252,7 @@ module control(rst, phase, // 組み合わせ回路
                     ar_e   <= 0;
                     br_e   <= 1;
                     dr_e   <= 1;
-                    mdr_e  <= 0;
+                    mdr_e  <= 1;
                     ir_e   <= 1;
                     reg_e  <= 1;
                     genr_w <= 1;
@@ -260,7 +262,7 @@ module control(rst, phase, // 組み合わせ回路
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
-                    m4_s   <= 0;
+                    m4_s   <= 1;
                     m5_s   <= 0; // Ra
                     m6_s   <= 0;
                     m7_s   <= 0;
@@ -272,7 +274,7 @@ module control(rst, phase, // 組み合わせ回路
                     br_e   <= 1;
                     dr_e   <= 1;
                     mdr_e  <= 0;
-                    ir_e   <= 0;
+                    ir_e   <= 1;
                     reg_e  <= 1;
                     genr_w <= 0;
                     // pc_e   <= 1;
@@ -331,13 +333,15 @@ module control(rst, phase, // 組み合わせ回路
                     end
             default: begin end
         endcase
+		  
+		  if(phase==3'b000||phase==3'b001||
+		  phase==3'b010||phase==3'b011||phase==3'b100)begin
+				genr_w<=0;
+		  end//phase 5notokinomi genr_w wo 1 nisuru
+		  
         end
-
-        if(phase!=3'b101) begin
-			genr_w<=0;
-		end //phase 5notokinomi genr_w wo 1 nisuru
-
     end
+
 
 
 endmodule
