@@ -1,4 +1,4 @@
-module register_general( //comment
+module register_general( //comment comment
     input clk,
     input rst,
     //　データを書き込む
