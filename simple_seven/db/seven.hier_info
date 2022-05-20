@@ -1,0 +1,143 @@
+|seven
+in[0] => in[0].IN1
+in[1] => in[1].IN1
+in[2] => in[2].IN1
+in[3] => in[3].IN1
+in[4] => in[4].IN1
+in[5] => in[5].IN1
+in[6] => in[6].IN1
+in[7] => in[7].IN1
+in[8] => in[8].IN1
+in[9] => in[9].IN1
+in[10] => in[10].IN1
+in[11] => in[11].IN1
+in[12] => in[12].IN1
+in[13] => in[13].IN1
+in[14] => in[14].IN1
+in[15] => in[15].IN1
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+signal => out.OUTPUTSELECT
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[8] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[9] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[10] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[11] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[12] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[13] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[14] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[15] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[16] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[17] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[18] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[19] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[20] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[21] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[22] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[23] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[24] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[25] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[26] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[27] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[28] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[29] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[30] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[31] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|seven|displaydigit:digit1
+bin[0] => Decoder0.IN3
+bin[1] => Decoder0.IN2
+bin[2] => Decoder0.IN1
+bin[3] => Decoder0.IN0
+led[0] <= <GND>
+led[1] <= WideOr6.DB_MAX_OUTPUT_PORT_TYPE
+led[2] <= WideOr5.DB_MAX_OUTPUT_PORT_TYPE
+led[3] <= WideOr4.DB_MAX_OUTPUT_PORT_TYPE
+led[4] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+led[5] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+led[6] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+led[7] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|seven|displaydigit:digit2
+bin[0] => Decoder0.IN3
+bin[1] => Decoder0.IN2
+bin[2] => Decoder0.IN1
+bin[3] => Decoder0.IN0
+led[0] <= <GND>
+led[1] <= WideOr6.DB_MAX_OUTPUT_PORT_TYPE
+led[2] <= WideOr5.DB_MAX_OUTPUT_PORT_TYPE
+led[3] <= WideOr4.DB_MAX_OUTPUT_PORT_TYPE
+led[4] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+led[5] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+led[6] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+led[7] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|seven|displaydigit:digit3
+bin[0] => Decoder0.IN3
+bin[1] => Decoder0.IN2
+bin[2] => Decoder0.IN1
+bin[3] => Decoder0.IN0
+led[0] <= <GND>
+led[1] <= WideOr6.DB_MAX_OUTPUT_PORT_TYPE
+led[2] <= WideOr5.DB_MAX_OUTPUT_PORT_TYPE
+led[3] <= WideOr4.DB_MAX_OUTPUT_PORT_TYPE
+led[4] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+led[5] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+led[6] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+led[7] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|seven|displaydigit:digit4
+bin[0] => Decoder0.IN3
+bin[1] => Decoder0.IN2
+bin[2] => Decoder0.IN1
+bin[3] => Decoder0.IN0
+led[0] <= <GND>
+led[1] <= WideOr6.DB_MAX_OUTPUT_PORT_TYPE
+led[2] <= WideOr5.DB_MAX_OUTPUT_PORT_TYPE
+led[3] <= WideOr4.DB_MAX_OUTPUT_PORT_TYPE
+led[4] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+led[5] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+led[6] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+led[7] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+
+
