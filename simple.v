@@ -1,4 +1,4 @@
-module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
+module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	input clk;
 	input rst;
 	input exec;
@@ -8,10 +8,11 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 	output[15:0]out2;
 	output[15:0]out3;
 	output[15:0]out4;
+	output[31:0]seg_out;
 	
 	
 	wire aluc_e, ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,jump,
-	mem_e,mem_w,m2_s,m3_s,m4_s,m5_s,m6_s,m7_s,m8_s,reg_write,reg_read;
+	mem_e,mem_w,m2_s,m3_s,m4_s,m5_s,m6_s,m7_s,m8_s,out_s,reg_write,reg_read;
 	wire [3:0] ALU_Cnt; //alu opcode
 	wire[5:0] instruction_six;
 	wire [15:0] ar; //AR content
@@ -50,9 +51,13 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 		if(rst)begin
 			phase <= 3'b000;
 			executing <= 0;
+			pc_e<=1;
 		end else begin
+			phase <= phase + 3'b001;
 			if (phase == 3'b000) begin // if Phase 0
+				
 				if ( (executing==0 & exec) || (executing & exec==0) ) begin
+					MEI<=mem_out1; // tamesinikuwaeta
 					phase <= 3'b001;
 					executing <= 1;
 				end else begin
@@ -63,18 +68,18 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 				stop_flag <= 1;
 			end
 			pc_e <= 1'b0;
-			phase <= phase + 3'b001;
+			 //kokoniarunoha exec tekini mazui
 			if(phase==3'b100)begin
 				pc_e <= 1'b1;
 			end
 			if(phase == 3'b101)begin // if Phase 5
-				if(stop_flag) begin
+				if(stop_flag ||(executing&exec)) begin  // ||executing&exec  wo kuwaeta
 					phase <= 3'b000;
 					executing <= 0;
 				end else begin
 				phase <= 3'b001;
 				
-				MEI <= meirei;
+				MEI <= meirei; //meirei wo mem_out1
 				end
 			end
 		end
@@ -84,11 +89,14 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
 	,.mem_e(mem_e)
 	,.mem_w(mem_w),.jump(jump) ,.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
-	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.alu_instruction(alu_instruction));
+	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.alu_instruction(alu_instruction));
 	//MEI wo ir nikaeta
 	
-	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(MEI)
-	, .reg_out(ir));
+	seven sev(.in(ar),.signal(out_s),.out(seg_out));
+	
+	
+	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1) //MEI wo mem_out1
+	, .reg_out(ir)); //ir_e wo 1'b1
 	
 	register_16 AR(.reg_e(clk), .reg_write_en(ar_e), .reg_in(m2)
 	, .reg_out(ar));
@@ -102,7 +110,7 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(m7)
 	,.reg_out(mdr));
 	
-	register_general(.clk(clk),.rst(rst),
+	register_general registerfile(.clk(clk),.rst(rst),
 	.reg_write_en(genr_w)   //reg_e wo genr_w nisita
 	,.reg_write_dest(m5),.reg_write_data(m8),.reg_read_addr_1(ir[13:11])
 	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2  //MEI wo ir nisita
@@ -116,10 +124,15 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 	,.C(C),.V(V));
 	
 	ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out)
-	,.clock(clk),.q(mem_out1));
+	,.clock(clk),.q(mem_out1));  
 	
-	ram01 data_memory(.data(dr),.wren(wren),.
+	
+	
+	ram02 data_memory(.data(re0),.wren(mem_w),.
 	address(dr),.clock(clk),.q(mem_out2));
+	
+	
+	
 	
 	program_counter pc_0(.pc_e(pc_e),.rst(rst),.j_flag(jump)
 	,.j_addr(dr),.pc_out(pc_out));   
@@ -150,9 +163,9 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=ir;
-	assign out2=re0; //br wo re1
-	assign out3=re1;
-	assign out4=pc_out;
+	assign out2=pc_out; //br wo re1
+	assign out3=re0;
+	assign out4=re1;
 	
 	endmodule
 
