@@ -7,7 +7,7 @@ module control(rst, phase,
 				genr_w,
 				//pc_e,
 				mem_e, mem_w,
-				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,
+				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,hlt,
                 alu_instruction);
 	input rst;
    input [2:0] phase;
@@ -19,7 +19,7 @@ module control(rst, phase,
 				genr_w, 
 				//pc_e,
 				mem_e, mem_w, 
-				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s;
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s,hlt;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
 	 wire [1:0] op = instruction[15:14];
@@ -76,8 +76,9 @@ module control(rst, phase,
         m7_s   <= 0;
         m8_s   <= 0;
 		  out_s<=0;
+		  hlt<=0;
 
-        if (!rst || phase == 3'b000) begin // if reset or at phase 0
+        if (rst || phase == 3'b000) begin // if reset or at phase 0
             aluc_e <= 0;
             ar_e   <= 0;
             br_e   <= 0;
@@ -246,6 +247,7 @@ module control(rst, phase,
                     m6_s   <= 0;
                     m7_s   <= 0;
                     m8_s   <= 0;
+						  hlt<=1;
                     end
                 5'b10000: begin //LD
                     aluc_e <= 1;

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
-=======
-module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	input clk;
 	input rst;
 	input exec;
@@ -13,14 +9,11 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	output[15:0]out3;
 	output[15:0]out4;
 	output[31:0]seg_out;
-<<<<<<< HEAD
 	output seg_sel;
-=======
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	
 	
 	wire aluc_e, ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,jump,
-	mem_e,mem_w,m2_s,m3_s,m4_s,m5_s,m6_s,m7_s,m8_s,out_s,reg_write,reg_read;
+	mem_e,mem_w,m2_s,m3_s,m4_s,m5_s,m6_s,m7_s,m8_s,out_s,hlt,reg_write,reg_read;
 	wire [3:0] ALU_Cnt; //alu opcode
 	wire[5:0] instruction_six;
 	wire [15:0] ar; //AR content
@@ -46,6 +39,10 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	wire [15:0] address;
 	wire [15:0] alu_out;
 	wire seg_sel;
+	wire rst_n;
+	wire exec_n;
+	assign rst_n=~rst;
+	assign exec_n=~exec;
 
 	reg pc_e;
 	wire[15:0]out;
@@ -58,7 +55,7 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 
 	// 3'b000: 初期状態, 3'b001: Phase１, 3'b010: Phase 2, ...
 	always@(posedge clk)begin
-		if(!rst)begin
+		if(rst_n)begin
 			phase <= 3'b000;
 			executing <= 0;
 			pc_e<=1;
@@ -66,20 +63,21 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 			phase <= phase + 3'b001;
 			if (phase == 3'b000) begin // if Phase 0
 				
-<<<<<<< HEAD
-				if ( (executing==0 & !exec) || (executing & exec) ) begin
+				if ( (executing==0 & exec_n) || (executing & ~exec_n) ) begin
 					 // tamesinikuwaeta
-=======
-				if ( (executing==0 & exec) || (executing & exec==0) ) begin
-					MEI<=mem_out1; // tamesinikuwaeta
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 					phase <= 3'b001;
 					executing <= 1;
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
 				end
 			end
-			if (executing & !exec) begin
+			
+			if(hlt==1'b1)begin
+				stop_flag<=1;
+			end
+			//stop_flag<=hlt;
+			
+			if (executing & exec_n) begin
 				stop_flag <= 1;
 			end
 			pc_e <= 1'b0;
@@ -88,31 +86,23 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 				pc_e <= 1'b1;
 			end
 			if(phase == 3'b101)begin // if Phase 5
-<<<<<<< HEAD
-				if(stop_flag ||(executing & !exec)) begin  // ||executing&exec  wo kuwaeta
-=======
-				if(stop_flag ||(executing&exec)) begin  // ||executing&exec  wo kuwaeta
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
+				if(stop_flag ||(executing & exec_n)) begin  // ||executing&exec  wo kuwaeta
 					phase <= 3'b000;
 					executing <= 0;
 				end else begin
 				phase <= 3'b001;
 				
-<<<<<<< HEAD
 				
-=======
-				MEI <= meirei; //meirei wo mem_out1
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 				end
 			end
 		end
 	end	
-	control controls(.rst(!rst),.phase(phase),.S(S),.Z(Z),.C(C),
+	control controls(.rst(rst_n),.phase(phase),.S(S),.Z(Z),.C(C),
 	.V(V),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
 	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
 	,.mem_e(mem_e)
 	,.mem_w(mem_w),.jump(jump) ,.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
-	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.alu_instruction(alu_instruction));
+	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.hlt(hlt),.alu_instruction(alu_instruction));
 	//MEI wo ir nikaeta
 	
 	seven sev(.in(ar),.signal(out_s),.out(seg_out));
@@ -133,11 +123,7 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(m7)
 	,.reg_out(mdr));
 	
-<<<<<<< HEAD
-	register_general registerfile(.clk(clk),.rst(!rst),
-=======
-	register_general registerfile(.clk(clk),.rst(rst),
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
+	register_general registerfile(.clk(clk),.rst(rst_n),
 	.reg_write_en(genr_w)   //reg_e wo genr_w nisita
 	,.reg_write_dest(m5),.reg_write_data(m8),.reg_read_addr_1(ir[13:11])
 	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2  //MEI wo ir nisita
@@ -150,10 +136,10 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	,. alu_in_a(ar), .alu_in_b(br), .alu_out(alu_out), .S(S),.Z(Z)
 	,.C(C),.V(V));
 	
-	ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out)
+	ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out)  
 	,.clock(clk),.q(mem_out1));  
 	
-	
+	//ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out),.clock(clk),.q(mem_out1));  
 	
 	ram02 data_memory(.data(re0),.wren(mem_w),.
 	address(dr),.clock(clk),.q(mem_out2));
@@ -161,11 +147,7 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	
 	
 	
-<<<<<<< HEAD
-	program_counter pc_0(.pc_e(pc_e),.rst(!rst),.j_flag(jump)
-=======
-	program_counter pc_0(.pc_e(pc_e),.rst(rst),.j_flag(jump)
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
+	program_counter pc_0(.pc_e(pc_e),.rst(rst_n),.j_flag(jump)
 	,.j_addr(dr),.pc_out(pc_out));   
 	
 	sign_extension siex(.d(ir[7:0]),.result(exd)); //ir[7:0] wo 8'b00001111
@@ -193,14 +175,10 @@ module simple(clk,rst,exec,meirei,in,out,out2,out3,out4,seg_out, phase);
 	multiplexer_16 m8_0(.mux_s(m8_s),.mux_in_a(m4),.mux_in_b(exd)
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
-	assign out=ir;
-<<<<<<< HEAD
-	assign out2=ar; //br wo re1
-=======
+	assign out=mem_out1;
 	assign out2=pc_out; //br wo re1
->>>>>>> 2cc019f21eb4369eeedd943b2c2f05205030f25e
 	assign out3=re0;
-	assign out4=re1;
+	assign out4=out_s;
 	
 	endmodule
 
