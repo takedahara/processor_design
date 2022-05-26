@@ -251,7 +251,7 @@ module control(rst, phase,
                     end
                 5'b10000: begin //LD
                     aluc_e <= 1;
-                    ar_e   <= 0;
+                    ar_e   <= 1;
                     br_e   <= 1;
                     dr_e   <= 1;
                     mdr_e  <= 1;
@@ -340,6 +340,11 @@ module control(rst, phase,
 		  phase==3'b010||phase==3'b011||phase==3'b100)begin
 				genr_w<=0;
 		  end//phase 5notokinomi genr_w wo 1 nisuru
+		  
+		  if(phase==3'b000||phase==3'b001||
+		  phase==3'b010||phase==3'b011||phase==3'b101)begin
+				mem_w<=0;
+		  end
 		  
         end
     end

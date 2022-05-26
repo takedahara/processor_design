@@ -7,7 +7,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	output[15:0]out;
 	output[15:0]out2;
 	output[15:0]out3;
-	output[15:0]out4;
+	output[31:0]out4;
 	output[31:0]seg_out;
 	output seg_sel;
 	
@@ -43,6 +43,8 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	wire exec_n;
 	assign rst_n=~rst;
 	assign exec_n=~exec;
+	
+	
 
 	reg pc_e;
 	wire[15:0]out;
@@ -92,7 +94,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 				end else begin
 				phase <= 3'b001;
 				
-				
+			
 				end
 			end
 		end
@@ -105,8 +107,8 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.hlt(hlt),.alu_instruction(alu_instruction));
 	//MEI wo ir nikaeta
 	
-	seven sev(.in(ar),.signal(out_s),.out(seg_out));
-	
+	seven sev(.in(mem_out1),.signal(1'b1),.out(seg_out));  //out_s wo 1'b1   ar wo re0
+	 //re0 wo kaeta
 	
 	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1) //MEI wo mem_out1
 	, .reg_out(ir)); //ir_e wo 1'b1
@@ -142,7 +144,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	//ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out),.clock(clk),.q(mem_out1));  
 	
 	ram02 data_memory(.data(re0),.wren(mem_w),.
-	address(dr),.clock(clk),.q(mem_out2));
+	address(alu_out),.clock(clk),.q(mem_out2));
 	
 	
 	
@@ -176,9 +178,9 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=mem_out1;
-	assign out2=pc_out; //br wo re1
+	assign out2=mem_w; //br wo re1
 	assign out3=re0;
-	assign out4=out_s;
+	assign out4=seg_out;
 	
 	endmodule
 
