@@ -56,8 +56,8 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 
 
 	// 3'b000: 初期状態, 3'b001: Phase１, 3'b010: Phase 2, ...
-	always@(posedge clk)begin
-		if(rst_n)begin
+	always@(posedge clk or negedge rst)begin
+		if(rst==0)begin
 			phase <= 3'b000;
 			executing <= 0;
 			pc_e<=1;
@@ -99,7 +99,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 			end
 		end
 	end	
-	control controls(.rst(rst_n),.phase(phase),.S(S),.Z(Z),.C(C),
+	control controls(.rst(rst),.phase(phase),.S(S),.Z(Z),.C(C),
 	.V(V),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
 	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
 	,.mem_e(mem_e)
@@ -125,7 +125,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(m7)
 	,.reg_out(mdr));
 	
-	register_general registerfile(.clk(clk),.rst(rst_n),
+	register_general registerfile(.clk(clk),.rst(rst),
 	.reg_write_en(genr_w)   //reg_e wo genr_w nisita
 	,.reg_write_dest(m5),.reg_write_data(m8),.reg_read_addr_1(ir[13:11])
 	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2  //MEI wo ir nisita
@@ -149,8 +149,8 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	
 	
 	
-	program_counter pc_0(.pc_e(pc_e),.rst(rst_n),.j_flag(jump)
-	,.j_addr(dr),.pc_out(pc_out));   
+	program_counter pc_0(.clock(clk),.rst(rst),.j_flag(jump)
+	,.j_addr(dr),.phase(phase),.pc_out(pc_out));   
 	
 	sign_extension siex(.d(ir[7:0]),.result(exd)); //ir[7:0] wo 8'b00001111
 	
@@ -178,7 +178,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=mem_out1;
-	assign out2=mem_w; //br wo re1
+	assign out2=pc_out; //br wo re1
 	assign out3=re0;
 	assign out4=seg_out;
 	

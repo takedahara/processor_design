@@ -78,7 +78,7 @@ module control(rst, phase,
 		  out_s<=0;
 		  hlt<=0;
 
-        if (rst || phase == 3'b000) begin // if reset or at phase 0
+        if (phase == 3'b000) begin // if reset or at phase 0
             aluc_e <= 0;
             ar_e   <= 0;
             br_e   <= 0;
