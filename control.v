@@ -55,28 +55,7 @@ module control(rst, phase,
             end
         endcase
 
-        // initialisation
-        aluc_e <= 0;
-        ar_e   <= 0;
-        br_e   <= 0;
-        dr_e   <= 0;
-        mdr_e  <= 0;
-        ir_e   <= 0;
-        reg_e  <= 0;
-        genr_w <= 0;
-        // pc_e   <= 0;
-        mem_e  <= 0;
-        mem_w  <= 0;
-        jump   <= 0;
-        m2_s   <= 0;
-        m3_s   <= 0;
-        m4_s   <= 0;
-        m5_s   <= 0;
-        m6_s   <= 0;
-        m7_s   <= 0;
-        m8_s   <= 0;
-		  out_s<=0;
-		  hlt<=0;
+        
 
         if (phase == 3'b000) begin // if reset or at phase 0
             aluc_e <= 0;
@@ -86,10 +65,10 @@ module control(rst, phase,
             mdr_e  <= 0;
             ir_e   <= 0;
             reg_e  <= 0;
-            genr_w <= 0;
+            
             // pc_e   <= 0;
             mem_e  <= 0;
-            mem_w  <= 0;
+            
             jump   <= 0;
             m2_s   <= 0;
             m3_s   <= 0;
@@ -108,10 +87,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 1;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 0; // PC+1
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -129,10 +108,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 0;
+                    
                     // pc_e   <= 0;
                     mem_e  <= 0;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -150,10 +129,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 0;
+                    
                     // pc_e   <= 0;
                     mem_e  <= 0;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -171,10 +150,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 1;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
@@ -192,10 +171,10 @@ module control(rst, phase,
                     mdr_e  <= 1;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 1;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -213,10 +192,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 0;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -235,10 +214,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 0;
                     reg_e  <= 0;
-                    genr_w <= 0;
+                    
                     // pc_e   <= 0;
                     mem_e  <= 0;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -257,10 +236,10 @@ module control(rst, phase,
                     mdr_e  <= 1;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 1;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
@@ -278,10 +257,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 0;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 1;
+                    
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
@@ -299,10 +278,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 1;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -320,10 +299,10 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    genr_w <= 0;
+                    
                     // pc_e   <= 1;
                     mem_e  <= 1;
-                    mem_w  <= 0;
+                    
                     jump   <= 1;
                     m2_s   <= 1;
                     m3_s   <= 1;
@@ -333,21 +312,50 @@ module control(rst, phase,
                     m7_s   <= 0;
                     m8_s   <= 0;
                     end
-            default: begin end
+            default: begin 
+					aluc_e <= 0;
+					
+					ar_e   <= 0;
+					br_e   <= 0;
+					dr_e   <= 0;
+					mdr_e  <= 0;
+					ir_e   <= 0;
+					reg_e  <= 0;
+					
+            // pc_e   <= 0;
+					mem_e  <= 0;
+					
+					jump   <= 0;
+					m2_s   <= 0;
+					m3_s   <= 0;
+					m4_s   <= 0;
+					m5_s   <= 0;
+					m6_s   <= 0;
+					m7_s   <= 0;
+					m8_s   <= 0;
+				end
+				
         endcase
 		  
-		  if(phase==3'b000||phase==3'b001||
-		  phase==3'b010||phase==3'b011||phase==3'b100)begin
+		  if(phase==3'b101&(command==5'b00000||command==5'b00001||command==5'b00010||command==5'b00011||
+		  command==5'b00100||command==5'b01000||command==5'b01001||command==5'b01010||command==5'b01011||command==5'b01100||
+		  command==5'b10000||command==5'b10010))begin
+				genr_w<=1;
+		  end else begin
 				genr_w<=0;
+		  
 		  end//phase 5notokinomi genr_w wo 1 nisuru
 		  
-		  if(phase==3'b000||phase==3'b001||
-		  phase==3'b010||phase==3'b011||phase==3'b101)begin
+		  if(phase==3'b101&command==5'b10001)begin
+				mem_w<=1;
+		  end else begin
 				mem_w<=0;
 		  end
 		  
-        end
+		  
+        
     end
+	 end
 
 
 

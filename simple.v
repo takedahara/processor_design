@@ -59,35 +59,24 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	always@(posedge clk or negedge rst)begin
 		if(rst==0)begin
 			phase <= 3'b000;
-			executing <= 0;
-			pc_e<=1;
+			executing <=0;  //
+			
 		end else begin
-			phase <= phase + 3'b001;
+			
 			if (phase == 3'b000) begin // if Phase 0
 				
-				if ( (executing==0 & exec_n) || (executing & ~exec_n) ) begin
+				if ( (executing==0 & exec==0) || (executing==1 & exec==1) ) begin
 					 // tamesinikuwaeta
-					phase <= 3'b001;
+					phase <= phase + 3'b001;
 					executing <= 1;
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
 				end
 			end
 			
-			if(hlt==1'b1)begin
-				stop_flag<=1;
-			end
-			//stop_flag<=hlt;
 			
-			if (executing & exec_n) begin
-				stop_flag <= 1;
-			end
-			pc_e <= 1'b0;
-			 //kokoniarunoha exec tekini mazui
-			if(phase==3'b100)begin
-				pc_e <= 1'b1;
-			end
-			if(phase == 3'b101)begin // if Phase 5
+			
+			else if(phase == 3'b101)begin // if Phase 5
 				if(stop_flag ||(executing & exec_n)) begin  // ||executing&exec  wo kuwaeta
 					phase <= 3'b000;
 					executing <= 0;
@@ -97,6 +86,20 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 			
 				end
 			end
+			else begin
+				phase <= phase + 3'b001;
+			end
+			
+			if(hlt==1'b1|(executing==1&exec==0))begin
+				stop_flag<=1;
+			end
+			//stop_flag<=hlt;
+			
+			
+			
+			 //kokoniarunoha exec tekini mazui
+			
+			
 		end
 	end	
 	control controls(.rst(rst),.phase(phase),.S(S),.Z(Z),.C(C),
@@ -179,7 +182,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 
 	assign out=mem_out1;
 	assign out2=pc_out; //br wo re1
-	assign out3=re0;
+	assign out3=mem_w;
 	assign out4=seg_out;
 	
 	endmodule
