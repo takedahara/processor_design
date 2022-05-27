@@ -333,6 +333,7 @@ module control(rst, phase,
 					m6_s   <= 0;
 					m7_s   <= 0;
 					m8_s   <= 0;
+					hlt<=0;
 				end
 				
         endcase
