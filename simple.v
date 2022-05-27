@@ -190,9 +190,9 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=mem_out1;
-	assign out2=alu_out; //br wo re1
-	assign out3=pc_out;
-	assign out4=ALU_Cnt;
+	assign out2=ALU_Cnt; //br wo re1
+	assign out3=alu_out;
+	assign out4=pc_out;
 	
 	endmodule
 
