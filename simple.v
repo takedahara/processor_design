@@ -49,6 +49,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	wire exec_n;
 	assign rst_n=~rst;
 	assign exec_n=~exec;
+	assign instruction_six={{ir[15:14]},{ir[7:4]}};
 	
 	
 
@@ -65,29 +66,47 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	always@(posedge clk or negedge rst)begin
 		if(rst==0)begin
 			phase <= 3'b000;
-			executing <= 0;
+			executing <=0;  //
+			stop_flag<=0;
 		end else begin
+			
 			if (phase == 3'b000) begin // if Phase 0
-				if ( (executing==0 && exec==0) || (executing==1 && exec==1) ) begin
+				
+				if ( (executing==0 & exec==0) || (executing==1 & exec==1) ) begin
+					 // tamesinikuwaeta
 					phase <= phase + 3'b001;
 					executing <= 1;
+					
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
 				end
-			end else if(phase == 3'b101)begin // if Phase 5
-				if(stop_flag || exec==0) begin
+				
+			end
+			
+			
+			
+			else if(phase == 3'b101)begin // if Phase 5
+				if(stop_flag ||(executing==1 & exec==0)) begin  // ||executing&exec  wo kuwaeta
 					phase <= 3'b000;
 					executing <= 0;
 				end else begin
-					phase <= 3'b001;
+				phase <= 3'b001;
+				
+			
 				end
-			end else begin
+			end
+			else begin
 				phase <= phase + 3'b001;
 			end
 			
-		//	if(hlt)begin
-		//		stop_flag<=1;
-		//	end			
+			if(hlt==1'b1)begin
+				stop_flag<=1;
+			end
+			//stop_flag<=hlt;
+			
+			
+			
+			 //kokoniarunoha exec tekini mazui
 			
 			
 		end
@@ -124,12 +143,12 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2  //MEI wo ir nisita
 	(re1)); 
 	
-	alu_control_unit aluconu(.alu_control_unit_e(aluc_e)
-	,.instruction_six(alu_instruction),.ALU_Cnt(ALU_Cnt));
+	alu_control_unit aluconu(.alu_control_unit_e(clk)
+	,.instruction_six(instruction_six),.ALU_Cnt(ALU_Cnt));
 	
 	alu alu_0( .opcode(ALU_Cnt),.d(ir[3:0])
 	,. alu_in_a(ar), .alu_in_b(br), .alu_out(alu_out), .S(S),.Z(Z)
-	,.C(C),.V(V));
+	,.C(C),.V(V));   //ar wo 3 br wo1  ALU_Cnt wo ir[7:4]
 	
 	ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out)  
 	,.clock(clk),.q(mem_out1));  
@@ -171,11 +190,12 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=mem_out1;
-	assign out2=pc_out; //br wo re1
-	assign out3=mem_w;
-	assign out4=seg_out;
+	assign out2=alu_out; //br wo re1
+	assign out3=pc_out;
+	assign out4=ALU_Cnt;
 	
 	endmodule
+
 
 
 
