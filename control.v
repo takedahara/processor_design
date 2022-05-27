@@ -35,6 +35,8 @@ module control(rst, phase,
     assign alu_instruction = (op==2'b11) ? { instruction[15:14], instruction[7:4] } : {instruction[15:10]};
 
     always @(*) begin
+        hlt <= 0;
+        
         // set the value of "command" depending on the instruction
         case(op)
             2'b11: command <= {1'b0,alu_op}; // ALU
