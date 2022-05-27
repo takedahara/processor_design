@@ -65,45 +65,29 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	always@(posedge clk or negedge rst)begin
 		if(rst==0)begin
 			phase <= 3'b000;
-			executing <=0;  //
-			
+			executing <= 0;
 		end else begin
-			
 			if (phase == 3'b000) begin // if Phase 0
-				
-				if ( (executing==0 & exec==0) || (executing==1 & exec==1) ) begin
-					 // tamesinikuwaeta
+				if ( (executing==0 && exec==0) || (executing==1 && exec==1) ) begin
 					phase <= phase + 3'b001;
 					executing <= 1;
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
 				end
-			end
-			
-			
-			
-			else if(phase == 3'b101)begin // if Phase 5
-				if(stop_flag ||(executing==1 & exec==0)) begin  // ||executing&exec  wo kuwaeta
+			end else if(phase == 3'b101)begin // if Phase 5
+				if(stop_flag || exec==0) begin
 					phase <= 3'b000;
 					executing <= 0;
 				end else begin
-				phase <= 3'b001;
-				
-			
+					phase <= 3'b001;
 				end
-			end
-			else begin
+			end else begin
 				phase <= phase + 3'b001;
 			end
 			
-		//	if(hlt==1'b1)begin
+		//	if(hlt)begin
 		//		stop_flag<=1;
-		//	end
-			//stop_flag<=hlt;
-			
-			
-			
-			 //kokoniarunoha exec tekini mazui
+		//	end			
 			
 			
 		end
@@ -192,7 +176,6 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	assign out4=seg_out;
 	
 	endmodule
-
 
 
 

@@ -19,7 +19,8 @@ module control(rst, phase,
 				genr_w, 
 				//pc_e,
 				mem_e, mem_w, 
-				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s,hlt;
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s;
+    output reg hlt = 0;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
 	 wire [1:0] op = instruction[15:14];
@@ -87,10 +88,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0; // PC+1
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -108,10 +106,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 0;
                     mem_e  <= 0;
-                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -129,10 +124,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 0;
                     mem_e  <= 0;
-                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -150,10 +142,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
@@ -171,10 +160,7 @@ module control(rst, phase,
                     mdr_e  <= 1;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -192,10 +178,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -214,10 +197,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 0;
                     reg_e  <= 0;
-                    
-                    // pc_e   <= 0;
                     mem_e  <= 0;
-                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -226,7 +206,7 @@ module control(rst, phase,
                     m6_s   <= 0;
                     m7_s   <= 0;
                     m8_s   <= 0;
-						  hlt<=1;
+						  hlt <= 1;
                     end
                 5'b10000: begin //LD
                     aluc_e <= 1;
@@ -236,10 +216,7 @@ module control(rst, phase,
                     mdr_e  <= 1;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
@@ -257,10 +234,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0;
                     m2_s   <= 1; // d
                     m3_s   <= 0;
@@ -278,10 +252,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 0;
                     m2_s   <= 0;
                     m3_s   <= 0;
@@ -299,10 +270,7 @@ module control(rst, phase,
                     mdr_e  <= 0;
                     ir_e   <= 1;
                     reg_e  <= 1;
-                    
-                    // pc_e   <= 1;
                     mem_e  <= 1;
-                    
                     jump   <= 1;
                     m2_s   <= 1;
                     m3_s   <= 1;
@@ -314,17 +282,13 @@ module control(rst, phase,
                     end
             default: begin 
 					aluc_e <= 0;
-					
 					ar_e   <= 0;
 					br_e   <= 0;
 					dr_e   <= 0;
 					mdr_e  <= 0;
 					ir_e   <= 0;
 					reg_e  <= 0;
-					
-            // pc_e   <= 0;
 					mem_e  <= 0;
-					
 					jump   <= 0;
 					m2_s   <= 0;
 					m3_s   <= 0;
@@ -333,7 +297,6 @@ module control(rst, phase,
 					m6_s   <= 0;
 					m7_s   <= 0;
 					m8_s   <= 0;
-					hlt<=0;
 				end
 				
         endcase
