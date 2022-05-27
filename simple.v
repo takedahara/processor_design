@@ -40,9 +40,9 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	wire [15:0] alu_out;
 	wire seg_sel;
 	wire rst_n;
-	wire exec_n;
+	// wire exec_n;
 	assign rst_n=~rst;
-	assign exec_n=~exec;
+	// assign exec_n=~exec;
 	
 	
 
@@ -56,52 +56,37 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 
 
 	// 3'b000: 初期状態, 3'b001: Phase１, 3'b010: Phase 2, ...
-	always@(posedge clk or negedge rst)begin
+	always@(posedge clk or negedge rst)begin // always at clock上がった時、またはresetが押されたとき
 		if(rst==0)begin
 			phase <= 3'b000;
-			executing <=0;  //
-			
+			executing <= 0;  //
 		end else begin
-			
 			if (phase == 3'b000) begin // if Phase 0
-				
 				if ( (executing==0 & exec==0) || (executing==1 & exec==1) ) begin
-					 // tamesinikuwaeta
 					phase <= phase + 3'b001;
 					executing <= 1;
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
 				end
-			end
-			
-			
-			
-			else if(phase == 3'b101)begin // if Phase 5
-				if(stop_flag ||(executing & exec_n)) begin  // ||executing&exec  wo kuwaeta
+			end else if(phase == 3'b101)begin // if Phase 5
+				if(stop_flag == 1'b1)) begin
 					phase <= 3'b000;
-					executing <= 0;
+					executing <= 1'b0;
 				end else begin
 				phase <= 3'b001;
-				
-			
 				end
-			end
-			else begin
+			end else begin // else
 				phase <= phase + 3'b001;
+				executing <= 1; // いらない
 			end
-			
-			if(hlt==1'b1|(executing==1&exec==0))begin
-				stop_flag<=1;
-			end
-			//stop_flag<=hlt;
-			
-			
-			
-			 //kokoniarunoha exec tekini mazui
-			
-			
 		end
-	end	
+			
+		if( hlt==1'b1 || (executing==1'b1 & exec==0) )begin
+			stop_flag <= 1;
+			end
+	end // always文end
+
+
 	control controls(.rst(rst),.phase(phase),.S(S),.Z(Z),.C(C),
 	.V(V),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
 	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
