@@ -1,4 +1,4 @@
-module control(rst, phase,
+module control(phase,
 				S,Z,C,V,
 				instruction,
 				aluc_e,
@@ -9,7 +9,6 @@ module control(rst, phase,
 				mem_e, mem_w,
 				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,hlt,
                 alu_instruction);
-	input rst;
    input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
@@ -17,10 +16,9 @@ module control(rst, phase,
 				ar_e,br_e,dr_e,mdr_e,ir_e, 
                 reg_e,
 				genr_w, 
-				//pc_e,
 				mem_e, mem_w, 
 				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s;
-    output reg hlt = 0;
+    output reg hlt;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
 	 wire [1:0] op = instruction[15:14];
@@ -359,7 +357,7 @@ module control(rst, phase,
         end
 
         // jump signal
-        if(command==5'b10011 || command==5'b10100 || command==5'b10101 || command==5'b10110
+        if(command==5'b10011 || command==5'b10100 || command==5'b10101 || command==5'b10110 || 
         command==5'b10111)begin
             jump <= 1;
         end else begin
@@ -421,14 +419,14 @@ module control(rst, phase,
         end
 
         // output signal (for 7SEG LED)
-        if(command==5'01101) begin // OUT命令
+        if(command==5'b01101) begin // OUT命令
             out_s <= 1;
         end else begin
             out_s <= 0;
         end
 
         // halt flag
-        if(command==5'01111) begin //HALT命令
+        if(command==5'b01111) begin //HALT命令
             hlt <= 1;
         end else begin
             hlt <= 0;
