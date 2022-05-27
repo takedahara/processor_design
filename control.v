@@ -34,9 +34,7 @@ module control(rst, phase,
     // else alu_instruction <=  {instruction[15:10]};
     assign alu_instruction = (op==2'b11) ? { instruction[15:14], instruction[7:4] } : {instruction[15:10]};
 
-    always @(*) begin
-        hlt <= 0;
-        
+    always @(*) begin        
         // set the value of "command" depending on the instruction
         case(op)
             2'b11: command <= {1'b0,alu_op}; // ALU
@@ -58,271 +56,401 @@ module control(rst, phase,
             end
         endcase
 
-        
-
-        if (phase == 3'b000) begin // if reset or at phase 0
-            aluc_e <= 0;
-            ar_e   <= 0;
-            br_e   <= 0;
-            dr_e   <= 0;
-            mdr_e  <= 0;
-            ir_e   <= 0;
-            reg_e  <= 0;
-            
-            // pc_e   <= 0;
-            mem_e  <= 0;
-            
-            jump   <= 0;
-            m2_s   <= 0;
-            m3_s   <= 0;
-            m4_s   <= 0;
-            m5_s   <= 0;
-            m6_s   <= 0;
-            m7_s   <= 0;
-            m8_s   <= 0;
-        end else begin
-            case(command)
-                5'b00000, 5'b00001, 5'b00010, 5'b00011, 5'b00100: begin//ADD, SUB, AND, OR, XOR
-                    aluc_e <= 1;
-                    ar_e   <= 1;
-                    br_e   <= 1;
-                    dr_e   <= 1;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0; // PC+1
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 1;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-                5'b00101: begin//CMP
-                    aluc_e <= 1;
-                    ar_e   <= 1;
-                    br_e   <= 1;
-                    dr_e   <= 0;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 0;
-                    jump   <= 0;
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 0;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-                5'b00110: begin //MOV
-                    aluc_e <= 1;
-                    ar_e   <= 0;
-                    br_e   <= 0;
-                    dr_e   <= 0;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 0;
-                    jump   <= 0;
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 1;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-                5'b01000, 5'b01001, 5'b01010, 5'b01011: begin //SLL, SLR, SRL, SRA
-                    aluc_e <= 1;
-                    ar_e   <= 0;
-                    br_e   <= 1;
-                    dr_e   <= 1;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0;
-                    m2_s   <= 1; // d
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 1;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-                5'b01100: begin //IN
-                    aluc_e <= 0;
-                    ar_e   <= 0;
-                    br_e   <= 0;
-                    dr_e   <= 0;
-                    mdr_e  <= 1;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0;
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 1;
-                    m5_s   <= 1;
-                    m6_s   <= 0;
-                    m7_s   <= 1;
-                    m8_s   <= 0;
-                    end
-                5'b01101: begin //OUT
-                    aluc_e <= 0;
-                    ar_e   <= 1;
-                    br_e   <= 0;
-                    dr_e   <= 0;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0;
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 0;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-						  out_s<=1;
-                    end
-                5'b01111: begin //HLT
-                    aluc_e <= 0;
-                    ar_e   <= 0;
-                    br_e   <= 0;
-                    dr_e   <= 0;
-                    mdr_e  <= 0;
-                    ir_e   <= 0;
-                    reg_e  <= 0;
-                    mem_e  <= 0;
-                    jump   <= 0;
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 0;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-						  hlt <= 1;
-                    end
-                5'b10000: begin //LD
-                    aluc_e <= 1;
-                    ar_e   <= 1;
-                    br_e   <= 1;
-                    dr_e   <= 1;
-                    mdr_e  <= 1;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0;
-                    m2_s   <= 1; // d
-                    m3_s   <= 0;
-                    m4_s   <= 1;
-                    m5_s   <= 0; // Ra
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-                5'b10001: begin //ST
-                    aluc_e <= 1;
-                    ar_e   <= 1;
-                    br_e   <= 1;
-                    dr_e   <= 1;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0;
-                    m2_s   <= 1; // d
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 0;
-                    m6_s   <= 1;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-                5'b10010: begin //LI
-                    aluc_e <= 0;
-                    ar_e   <= 0;
-                    br_e   <= 0;
-                    dr_e   <= 0;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 0;
-                    m2_s   <= 0;
-                    m3_s   <= 0;
-                    m4_s   <= 0;
-                    m5_s   <= 1;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 1;
-                    end
-                5'b10011, 5'b10100, 5'b10101, 5'b10110, 5'b10111: begin //B, BE,BLT, BLE, BNE
-                    aluc_e <= 1;
-                    ar_e   <= 1;
-                    br_e   <= 1;
-                    dr_e   <= 1;
-                    mdr_e  <= 0;
-                    ir_e   <= 1;
-                    reg_e  <= 1;
-                    mem_e  <= 1;
-                    jump   <= 1;
-                    m2_s   <= 1;
-                    m3_s   <= 1;
-                    m4_s   <= 0;
-                    m5_s   <= 0;
-                    m6_s   <= 0;
-                    m7_s   <= 0;
-                    m8_s   <= 0;
-                    end
-            default: begin 
-					aluc_e <= 0;
-					ar_e   <= 0;
-					br_e   <= 0;
-					dr_e   <= 0;
-					mdr_e  <= 0;
-					ir_e   <= 0;
-					reg_e  <= 0;
-					mem_e  <= 0;
-					jump   <= 0;
-					m2_s   <= 0;
-					m3_s   <= 0;
-					m4_s   <= 0;
-					m5_s   <= 0;
-					m6_s   <= 0;
-					m7_s   <= 0;
-					m8_s   <= 0;
-				end
+        // if (phase == 3'b000) begin // if reset or at phase 0
+            // aluc_e <= 0;
+            // ar_e   <= 0;
+            // br_e   <= 0;
+            // dr_e   <= 0;
+            // mdr_e  <= 0;
+            // ir_e   <= 0;
+            // reg_e  <= 0;
+            // mem_e  <= 0;
+            // jump   <= 0;
+            // m2_s   <= 0;
+            // m3_s   <= 0;
+            // m4_s   <= 0;
+            // m5_s   <= 0;
+            // m6_s   <= 0;
+            // m7_s   <= 0;
+            // m8_s   <= 0;
+        // end else begin
+            // case(command)
+                // 5'b00000, 5'b00001, 5'b00010, 5'b00011, 5'b00100: begin//ADD, SUB, AND, OR, XOR
+                    // aluc_e <= 1;
+                    // ar_e   <= 1;
+                    // br_e   <= 1;
+                    // dr_e   <= 1;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0; // PC+1
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 1;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b00101: begin//CMP
+                    // aluc_e <= 1;
+                    // ar_e   <= 1;
+                    // br_e   <= 1;
+                    // dr_e   <= 0;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 0;
+                    // jump   <= 0;
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 0;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b00110: begin //MOV
+                    // aluc_e <= 1;
+                    // ar_e   <= 0;
+                    // br_e   <= 0;
+                    // dr_e   <= 0;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 0;
+                    // jump   <= 0;
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 1;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b01000, 5'b01001, 5'b01010, 5'b01011: begin //SLL, SLR, SRL, SRA
+                    // aluc_e <= 1;
+                    // ar_e   <= 0;
+                    // br_e   <= 1;
+                    // dr_e   <= 1;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0;
+                    // m2_s   <= 1; // d
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 1;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b01100: begin //IN
+                    // aluc_e <= 0;
+                    // ar_e   <= 0;
+                    // br_e   <= 0;
+                    // dr_e   <= 0;
+                    // mdr_e  <= 1;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0;
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 1;
+                    // m5_s   <= 1;
+                    // m6_s   <= 0;
+                    // m7_s   <= 1;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b01101: begin //OUT
+                    // aluc_e <= 0;
+                    // ar_e   <= 1;
+                    // br_e   <= 0;
+                    // dr_e   <= 0;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0;
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 0;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+						//   out_s<=1;
+                    // end
+                // 5'b01111: begin //HLT
+                    // aluc_e <= 0;
+                    // ar_e   <= 0;
+                    // br_e   <= 0;
+                    // dr_e   <= 0;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 0;
+                    // reg_e  <= 0;
+                    // mem_e  <= 0;
+                    // jump   <= 0;
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 0;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+						//   hlt <= 1;
+                    // end
+                // 5'b10000: begin //LD
+                    // aluc_e <= 1;
+                    // ar_e   <= 1;
+                    // br_e   <= 1;
+                    // dr_e   <= 1;
+                    // mdr_e  <= 1;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0;
+                    // m2_s   <= 1; // d
+                    // m3_s   <= 0;
+                    // m4_s   <= 1;
+                    // m5_s   <= 0; // Ra
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b10001: begin //ST
+                    // aluc_e <= 1;
+                    // ar_e   <= 1;
+                    // br_e   <= 1;
+                    // dr_e   <= 1;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0;
+                    // m2_s   <= 1; // d
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 0;
+                    // m6_s   <= 1;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // 5'b10010: begin //LI
+                    // aluc_e <= 0;
+                    // ar_e   <= 0;
+                    // br_e   <= 0;
+                    // dr_e   <= 0;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 0;
+                    // m2_s   <= 0;
+                    // m3_s   <= 0;
+                    // m4_s   <= 0;
+                    // m5_s   <= 1;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 1;
+                    // end
+                // 5'b10011, 5'b10100, 5'b10101, 5'b10110, 5'b10111: begin //B, BE,BLT, BLE, BNE
+                    // aluc_e <= 1;
+                    // ar_e   <= 1;
+                    // br_e   <= 1;
+                    // dr_e   <= 1;
+                    // mdr_e  <= 0;
+                    // ir_e   <= 1;
+                    // reg_e  <= 1;
+                    // mem_e  <= 1;
+                    // jump   <= 1;
+                    // m2_s   <= 1;
+                    // m3_s   <= 1;
+                    // m4_s   <= 0;
+                    // m5_s   <= 0;
+                    // m6_s   <= 0;
+                    // m7_s   <= 0;
+                    // m8_s   <= 0;
+                    // end
+                // default: begin 
+					// aluc_e <= 0;
+					// ar_e   <= 0;
+					// br_e   <= 0;
+					// dr_e   <= 0;
+					// mdr_e  <= 0;
+					// ir_e   <= 0;
+					// reg_e  <= 0;
+					// mem_e  <= 0;
+					// jump   <= 0;
+					// m2_s   <= 0;
+					// m3_s   <= 0;
+					// m4_s   <= 0;
+					// m5_s   <= 0;
+					// m6_s   <= 0;
+					// m7_s   <= 0;
+					// m8_s   <= 0;
+				// end
 				
-        endcase
-		  
-		  if(phase==3'b101&(command==5'b00000||command==5'b00001||command==5'b00010||command==5'b00011||
-		  command==5'b00100||command==5'b01000||command==5'b01001||command==5'b01010||command==5'b01011||command==5'b01100||
-		  command==5'b10000||command==5'b10010))begin
-				genr_w<=1;
-		  end else begin
-				genr_w<=0;
-		  
-		  end//phase 5notokinomi genr_w wo 1 nisuru
-		  
-		  if(phase==3'b101&command==5'b10001)begin
-				mem_w<=1;
-		  end else begin
-				mem_w<=0;
-		  end
-		  
-		  
+        // endcase
+
+        // alu control unit signal
+        if(phase==3'b000 || command==5'b01100 || command==5'b01101 || command==5'b01111
+        || command== 5'b10010) begin
+            aluc_e <= 0;
+        end else begin
+            aluc_e <= 1;
+        end
+
+        // ar signal
+        if(command== 5'b00000 || command==5'b00001 || command==5'b00010 || command==5'b00011
+        || command==5'b00100 || command==5'b00101 || command==5'b01101 || command==5'b10000
+        || command==5'b10001 || command==5'b10011 || command==5'b10100 || command==5'b10101
+        || command==5'b10110 || command==5'b10111) begin
+            ar_e <= 1;
+        end else begin
+            ar_e <= 0;
+        end
         
-    end
-	 end
+        // br signal
+        if(phase==3'b000 || command==5'b00110 || command==5'b01100 || command==5'b01101 || command==5'b01111
+        || command==5'b10010) begin
+            br_e <= 0;
+        end else begin
+            br_e <= 1;
+        end
 
+        // dr signal
+        if(phase==3'b000 || command==5'b00101 || command==5'b00110 || command==5'b01100 || command==5'b01101
+        || command==5'b01111 || command==5'b10010) begin
+            dr_e <= 0;
+        end else begin
+            dr_e <= 1;
+        end
 
+        // mdr signal
+        if(command==5'b01100 || command==5'b10000) begin
+            mdr_e <= 1;
+        end else begin
+            mdr_e <= 0;
+        end
+
+        // ir signal
+        if(phase==3'b000 || command==5'b01111) begin
+            ir_e <= 0;
+        end else begin
+            ir_e <= 1;
+        end
+
+        // the clock for all the registers
+        if(phase==3'b000 || command==5'b01111) begin
+            reg_e <= 0;
+        end else begin
+            reg_e <= 1;
+        end
+
+        // memory read
+        if(phase==3'b000 || command==5'b00101 || command==5'b00110 || command==5'b01111) begin
+            mem_e <= 0;
+        end else begin
+            mem_e <= 1;
+        end
+
+        // jump signal
+        if(command==5'b10011 || command==5'b10100 || command==5'b10101 || command==5'b10110
+        command==5'b10111)begin
+            jump <= 1;
+        end else begin
+            jump <= 0;
+        end
+
+        // mux2 selector
+        if(command==5'b01000 || command==5'b01001 || command==5'b01010 || command==5'b01011
+        || command==5'b10000 || command==5'b10001 || command==5'b10011 || command==5'b10100
+        || command==5'b10101 || command==5'b10110 || command==5'b10111) begin
+            m2_s <= 1;
+        end else begin
+            m2_s <= 0;
+        end
+        
+        // mux3 selector
+        if(command==5'b10011 || command==5'b10100 || command==5'b10101 || command==5'b10110
+        || command==5'b10111) begin
+            m3_s <= 1;
+        end else begin
+            m3_s <= 0;
+        end
+        
+        // mux4 selector
+        if(command==5'b01100 || command==5'b10000) begin
+            m4_s <= 1;
+        end else begin
+            m4_s <= 0;
+        end
+
+        // mux5 selector
+        if(phase==3'b000 || command==5'b00101 || command==5'b01101 || command==5'b01111
+        || command==5'b10000 || command==5'b10001 || command==5'b10011 || command==5'b10100
+        || command==5'b10101 || command==5'b10110 || command==5'b10111) begin
+            m5_s <= 0;
+        end else begin
+            m5_s <= 1;
+        end
+        
+        // mux6 selector
+        if(command==5'b10001) begin
+            m6_s <= 1;
+        end else begin
+            m6_s <= 0;
+        end
+
+        // mux7 selector
+        if(command==5'b01100) begin
+            m7_s <= 1;
+        end else begin
+            m7_s <= 0;
+        end
+
+        // mux8 selector
+        if(command==5'b10010) begin
+            m8_s <= 1;
+        end else begin
+            m8_s <= 0;
+        end
+
+        // output signal (for 7SEG LED)
+        if(command==5'01101) begin // OUT命令
+            out_s <= 1;
+        end else begin
+            out_s <= 0;
+        end
+
+        // halt flag
+        if(command==5'01111) begin //HALT命令
+            hlt <= 1;
+        end else begin
+            hlt <= 0;
+        end
+
+        // 汎用レジスタに書き込む
+		if(phase==3'b101 && (command==5'b00000 || command==5'b00001 || command==5'b00010
+        || command==5'b00011 || command==5'b00100 || command==5'b01000 || command==5'b01001
+        || command==5'b01010 || command==5'b01011 || command==5'b01100 || command==5'b10000
+        || command==5'b10010))begin
+			genr_w<=1;
+		end else begin
+			genr_w<=0;
+		end
+		
+        // メモリに書き込む
+		if(phase==3'b101 && command==5'b10001)begin
+			mem_w<=1;
+		end else begin
+			mem_w<=0;
+		end
+	   
+    end // alwaysのend
 
 endmodule
