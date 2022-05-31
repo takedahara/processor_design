@@ -7,7 +7,7 @@ module control(phase,
 				genr_w,
 				//pc_e,
 				mem_e, mem_w,
-				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,hlt,
+				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,hlt,szcv_s,
                 alu_instruction);
    input [2:0] phase;
 	input S, Z, C, V;
@@ -17,7 +17,7 @@ module control(phase,
                 reg_e,
 				genr_w, 
 				mem_e, mem_w, 
-				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s;
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s,szcv_s;
     output reg hlt;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
@@ -44,16 +44,43 @@ module control(phase,
                     3'b100: command <= 5'b10011; //B PC=PC+1+sign_ext(d)
                     3'b111: begin
                         case(r2)
-                            3'b000: if(Z) command <= 5'b10100; //BE PC=PC+1+sign_ext(d)
-                            3'b001: if (S^V) command <= 5'b10101; //BLT PC=PC+1+sign_ext(d)
-                            3'b010: if (Z||(S^V)) command <= 5'b10110; //BLE PC=PC+1+sign_ext(d)
-                            3'b011: if (!Z) command <= 5'b10111; //BNE PC=PC+1+sing_ext(d)
+                            3'b000: begin
+											case(Z)
+												1'b1:command<=5'b10100; //BE PC=PC+1+sign_ext(d)
+												1'b0:command<=5'b11000;  //11000 wo 10100
+												default:command<=5'b11000;
+											endcase
+									 end
+									 3'b001: begin
+											case(S^V)
+												1'b1:command<=5'b10101;  //BLT PC=PC+1+sign_ext(d)
+												1'b0:command<=5'b11000;  //11000 wo 10101
+												default:command<=5'b11000;
+											endcase
+									 end
+									 3'b010: begin
+											case(Z||(S^V))
+												1'b1:command<=5'b10110;  //BLE PC=PC+1+sign_ext(d)
+												1'b0:command<=5'b11000;  //11000 wo 10110
+												default:command<=5'b11000;
+											endcase
+									 end
+									 3'b011: begin
+											case(Z)
+												1'b1:command<=5'b11000;   //11000 wo 10111
+												1'b0:command<=5'b10111;  //BNE PC=PC+1+sing_ext(d)
+												default:command<=5'b11000;
+											endcase
+									 end
+									 default:command<=5'b11000;
                         endcase
-                    end
+						  end
+						  default:command<=5'b11000;
+                    
                 endcase
             end
+				default:command<=5'b11000;
         endcase
-
         // if (phase == 3'b000) begin // if reset or at phase 0
             // aluc_e <= 0;
             // ar_e   <= 0;
@@ -306,14 +333,14 @@ module control(phase,
         if(command== 5'b00000 || command==5'b00001 || command==5'b00010 || command==5'b00011
         || command==5'b00100 || command==5'b00101 || command==5'b01101 || command==5'b10000
         || command==5'b10001 || command==5'b10011 || command==5'b10100 || command==5'b10101
-        || command==5'b10110 || command==5'b10111) begin
+        || command==5'b10110 || command==5'b10111||command==5'b00110) begin
             ar_e <= 1;
         end else begin
             ar_e <= 0;
         end
         
         // br signal
-        if(phase==3'b000 || command==5'b00110 || command==5'b01100 || command==5'b01101 || command==5'b01111
+        if(phase==3'b000 || command==5'b01100 || command==5'b01101 || command==5'b01111
         || command==5'b10010) begin
             br_e <= 0;
         end else begin
@@ -321,7 +348,7 @@ module control(phase,
         end
 
         // dr signal
-        if(phase==3'b000 || command==5'b00101 || command==5'b00110 || command==5'b01100 || command==5'b01101
+        if(phase==3'b000 || command==5'b00101 ||  command==5'b01100 || command==5'b01101
         || command==5'b01111 || command==5'b10010) begin
             dr_e <= 0;
         end else begin
@@ -436,7 +463,7 @@ module control(phase,
 		if(phase==3'b101 && (command==5'b00000 || command==5'b00001 || command==5'b00010
         || command==5'b00011 || command==5'b00100 || command==5'b01000 || command==5'b01001
         || command==5'b01010 || command==5'b01011 || command==5'b01100 || command==5'b10000
-        || command==5'b10010))begin
+        || command==5'b10010||command==5'b00110))begin
 			genr_w<=1;
 		end else begin
 			genr_w<=0;
@@ -448,7 +475,15 @@ module control(phase,
 		end else begin
 			mem_w<=0;
 		end
-	   
+		
+		if(phase==3'b101&&(command==5'b00000 || command==5'b00001 || command==5'b00010
+        || command==5'b00011 || command==5'b00100 || command==5'b00101 || command==5'b00110
+        || command==5'b01000 || command==5'b01001 || command==5'b01010 || command==5'b01011
+        ))begin
+			szcv_s<=1'b1;
+		end else begin
+			szcv_s<=1'b0;
+		end
     end // alwaysのend
 
 endmodule

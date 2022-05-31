@@ -4,6 +4,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	input clk;
 	input rst;
@@ -44,9 +61,12 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	wire[15:0] pc_out;
 	wire [15:0] address;
 	wire [15:0] alu_out;
+	wire[3:0] Flag;
 	wire seg_sel;
 	wire rst_n;
 	wire exec_n;
+	wire szcv_s;
+	
 	assign rst_n=~rst;
 	assign exec_n=~exec;
 	assign instruction_six={{ir[15:14]},{ir[7:4]}};
@@ -79,6 +99,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 					//stop_flag<=1'b0;  kokoni kuwaeta
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
+					executing<=0;
 				end
 				
 			end
@@ -111,17 +132,19 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 			
 		end
 	end	
-	control controls(.rst(rst),.phase(phase),.S(S),.Z(Z),.C(C),
-	.V(V),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
+	control controls(.phase(phase),.S(Flag[3]),.Z(Flag[2]),.C(Flag[1]),
+	.V(Flag[0]),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
 	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
 	,.mem_e(mem_e)
 	,.mem_w(mem_w),.jump(jump) ,.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
-	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.hlt(hlt),.alu_instruction(alu_instruction));
+	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.hlt(hlt),.szcv_s(szcv_s),.
+	alu_instruction(alu_instruction));
 	//MEI wo ir nikaeta
 	
 	seven sev(.in(re0),.signal(out_s),.out(seg_out));  //out_s wo 1'b1   ar wo re0
 	 //re0 wo kaeta  mem_out1 wo pc_out
 	
+	szcv_register(.reg_e(clk),.reg_write_en(szcv_s),.reg_in({S,Z,C,V}),.reg_out(Flag));
 	
 	
 	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1) //MEI wo mem_out1
@@ -193,8 +216,8 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 
 	assign out=mem_out1;
 	assign out2=pc_out; //br wo re1
-	assign out3=Z;
-	assign out4=re1;
+	assign out3=Flag[2];
+	assign out4=jump;
 	
 	endmodule
 
