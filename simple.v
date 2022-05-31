@@ -66,7 +66,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	always@(posedge clk or negedge rst)begin
 		if(rst==0)begin
 			phase <= 3'b000;
-			executing <=0;  //
+			executing <=0;  //  1 ni sitemita
 			stop_flag<=0;
 		end else begin
 			
@@ -76,7 +76,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 					 // tamesinikuwaeta
 					phase <= phase + 3'b001;
 					executing <= 1;
-					
+					//stop_flag<=1'b0;  kokoni kuwaeta
 				end else begin
 					phase <= 3'b000; //stay in 初期状態
 				end
@@ -119,8 +119,10 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.hlt(hlt),.alu_instruction(alu_instruction));
 	//MEI wo ir nikaeta
 	
-	seven sev(.in(mem_out1),.signal(1'b1),.out(seg_out));  //out_s wo 1'b1   ar wo re0
-	 //re0 wo kaeta
+	seven sev(.in(re0),.signal(out_s),.out(seg_out));  //out_s wo 1'b1   ar wo re0
+	 //re0 wo kaeta  mem_out1 wo pc_out
+	
+	
 	
 	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1) //MEI wo mem_out1
 	, .reg_out(ir)); //ir_e wo 1'b1
@@ -190,9 +192,9 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 
 	assign out=mem_out1;
-	assign out2=ALU_Cnt; //br wo re1
-	assign out3=alu_out;
-	assign out4=pc_out;
+	assign out2=pc_out; //br wo re1
+	assign out3=Z;
+	assign out4=re1;
 	
 	endmodule
 
