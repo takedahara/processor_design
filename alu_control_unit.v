@@ -8,7 +8,7 @@ module alu_control_unit(alu_control_unit_e, instruction_six, ALU_Cnt);
             6'b00xxxx: ALU_Cnt=4'b0000; // load --> add
             6'b01xxxx: ALU_Cnt=4'b0000; // store --> add
 
-            6'b10111x: ALU_Cnt=4'b0000; // 条件分岐命令 --> add
+            6'b10xxxx: ALU_Cnt=4'b0000; // 条件分岐命令 --> add
 
             // ALU演算・入出力命令: 11で始まるやつ
             6'b110000: ALU_Cnt=4'b0000;
