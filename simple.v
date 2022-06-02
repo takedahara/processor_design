@@ -1,6 +1,7 @@
 
 
-module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
+module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_out_2,seg_sel,seg_sel_1,
+seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	input clk;
 	input rst;
 	input exec;
@@ -11,7 +12,15 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	output[15:0]out3;
 	output[31:0]out4;
 	output[31:0]seg_out;
+	output[31:0]seg_out_2;
 	output seg_sel;
+	output seg_sel_1;
+	output seg_sel_2;
+	output seg_sel_3;
+	output seg_sel_4;
+	output seg_sel_5;
+	output seg_sel_6;
+	output seg_sel_7;
 	
 	
 	wire aluc_e, ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,jump,
@@ -33,6 +42,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	wire[15:0] m7;
 	wire[15:0] m8;
 	wire[15:0] m9;
+	wire[15:0] m10;
 	wire[15:0] mem_out1; //meireifech
 	wire[15:0] mem_out2; //roadmeirei P4
 	wire[15:0] exd;
@@ -44,6 +54,13 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	wire [15:0] alu_out;
 	wire[3:0] Flag;
 	wire seg_sel;
+	wire seg_sel_1;
+	wire seg_sel_2;
+	wire seg_sel_3;
+	wire seg_sel_4;
+	wire seg_sel_5;
+	wire seg_sel_6;
+	wire seg_sel_7;
 	wire rst_n;
 	wire exec_n;
 	wire szcv_s;
@@ -56,7 +73,7 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 
 	reg pc_e;
 	wire[15:0]out;
-	assign seg_sel=1'b1;
+	
 
 	output reg[2:0]phase=3'b000;
 	reg executing = 0; // 実行中・停止中を表す
@@ -125,6 +142,12 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	
 	seven sev(.in(re0),.signal(out_s),.out(seg_out));  //out_s wo 1'b1   ar wo re0
 	 //re0 wo kaeta  mem_out1 wo pc_out
+	 
+	seven sev2(.in(m10),.signal(out_s),.out(seg_out_2));
+	
+	SEG_SEL(.in(ir[3:1]),.seg_sel(seg_sel),.seg_sel_1(seg_sel_1),.seg_sel_2(seg_sel_2)
+	,.seg_sel_3(seg_sel_3),.seg_sel_4(seg_sel_4),.seg_sel_5(seg_sel_5),.seg_sel_6(seg_sel_6)
+	,.seg_sel_7(seg_sel_7));
 	
 	szcv_register(.reg_e(clk),.reg_write_en(szcv_s),.reg_in({S,Z,C,V}),.reg_out(Flag));
 	
@@ -198,6 +221,8 @@ module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
 	,.mux_out(m8));  //m8_s ga 1 ni nattenai
 	
 	multiplexer_16 m9_0(.mux_s(m9_s),.mux_in_a(m2),.mux_in_b(exd_im),.mux_out(m9));
+	
+	multiplexer_16 m10_0(.mux_s(ir[10]),.mux_in_a(16'b0000000000000000),.mux_in_b(re1),.mux_out(m10));
 
 	assign out=mem_out1;
 	assign out2=pc_out; //br wo re1
