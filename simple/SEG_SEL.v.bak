@@ -1,0 +1,2 @@
+module SEG_SEL(in,seg_sel,seg_sel_1,seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7);
+	

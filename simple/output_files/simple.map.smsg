@@ -1,0 +1,8 @@
+Info (10281): Verilog HDL Declaration information at alu.v(11): object "C" differs only in case from object "c" in the same scope File: C:/Users/admin/Desktop/alu/alu.v Line: 11
+Warning (10268): Verilog HDL information at Add.v(9): always construct contains both blocking and non-blocking assignments File: C:/Users/admin/Desktop/Add/Add.v Line: 9
+Info (10281): Verilog HDL Declaration information at simple.v(16): object "seg_sel" differs only in case from object "seg_SEL" in the same scope File: C:/Users/admin/Desktop/simple/simple.v Line: 16
+Info (10281): Verilog HDL Declaration information at simple.v(34): object "ir" differs only in case from object "IR" in the same scope File: C:/Users/admin/Desktop/simple/simple.v Line: 34
+Info (10281): Verilog HDL Declaration information at simple.v(30): object "ar" differs only in case from object "AR" in the same scope File: C:/Users/admin/Desktop/simple/simple.v Line: 30
+Info (10281): Verilog HDL Declaration information at simple.v(31): object "br" differs only in case from object "BR" in the same scope File: C:/Users/admin/Desktop/simple/simple.v Line: 31
+Info (10281): Verilog HDL Declaration information at simple.v(32): object "dr" differs only in case from object "DR" in the same scope File: C:/Users/admin/Desktop/simple/simple.v Line: 32
+Info (10281): Verilog HDL Declaration information at simple.v(33): object "mdr" differs only in case from object "MDR" in the same scope File: C:/Users/admin/Desktop/simple/simple.v Line: 33

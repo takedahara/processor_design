@@ -1,0 +1,16 @@
+Fitter Status : Successful - Mon Jun 06 13:38:48 2022
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : simple
+Top-level Entity Name : simple
+Family : Cyclone IV E
+Device : EP4CE30F23I7
+Timing Models : Final
+Total logic elements : 1,154 / 28,848 ( 4 % )
+    Total combinational functions : 1,112 / 28,848 ( 4 % )
+    Dedicated logic registers : 450 / 28,848 ( 2 % )
+Total registers : 450
+Total pins : 174 / 329 ( 53 % )
+Total virtual pins : 0
+Total memory bits : 131,072 / 608,256 ( 22 % )
+Embedded Multiplier 9-bit elements : 0 / 132 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

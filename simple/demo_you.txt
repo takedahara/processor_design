@@ -1,0 +1,507 @@
+
+
+module simple(clk,rst,exec,in,out,out2,out3,out4,seg_out,seg_sel, phase);
+	input clk;
+	input rst;
+	input exec;
+
+	input[15:0]in;
+	output[15:0]out;
+	output[15:0]out2;
+	output[15:0]out3;
+	output[31:0]out4;
+	output[31:0]seg_out;
+	output seg_sel;
+	
+	
+	wire aluc_e, ar_e,br_e,dr_e,mdr_e,ir_e,S,Z,C,V,jump,
+	mem_e,mem_w,m2_s,m3_s,m4_s,m5_s,m6_s,m7_s,m8_s,out_s,hlt,reg_write,reg_read;
+	wire [3:0] ALU_Cnt; //alu opcode
+	wire[5:0] instruction_six;
+	wire [15:0] ar; //AR content
+	wire[15:0] br; //BR content
+	wire[15:0] dr; //DR content
+	wire[15:0] mdr; //MDR content
+	wire[15:0] ir; //ir content
+	wire[15:0] pc; //
+	wire[15:0] pc_inc; //pc+1
+	wire[15:0] m2;
+	wire[15:0] m3;
+	wire[15:0] m4;
+	wire[15:0] m5;
+	wire[15:0] m6;
+	wire[15:0] m7;
+	wire[15:0] m8;
+	wire[15:0] mem_out1; //meireifech
+	wire[15:0] mem_out2; //roadmeirei P4
+	wire[15:0] exd;
+	wire[15:0] re0;
+	wire[15:0] re1;
+	wire[15:0] pc_out;
+	wire [15:0] address;
+	wire [15:0] alu_out;
+	wire[3:0] Flag;
+	wire seg_sel;
+	wire rst_n;
+	wire exec_n;
+	wire szcv_s;
+	
+	assign rst_n=~rst;
+	assign exec_n=~exec;
+	assign instruction_six={{ir[15:14]},{ir[7:4]}};
+	
+	
+
+	reg pc_e;
+	wire[15:0]out;
+	assign seg_sel=1'b1;
+
+	output reg[2:0]phase=3'b000;
+	reg executing = 0; // 実行中・停止中を表す
+	reg stop_flag = 0; // if stop_flag == 1, then stop after this instruction
+
+
+	// 3'b000: 初期状態, 3'b001: Phase１, 3'b010: Phase 2, ...
+	always@(posedge clk or negedge rst)begin
+		if(rst==0)begin
+			phase <= 3'b000;
+			executing <=0;  //  1 ni sitemita
+			stop_flag<=0;
+		end else begin
+			
+			if (phase == 3'b000) begin // if Phase 0
+				
+				if ( (executing==0 && exec==0) || (executing==1 && exec==1) ) begin
+					 // tamesinikuwaeta
+					phase <= phase + 3'b001;
+					executing <= 1;
+					//stop_flag<=1'b0;  kokoni kuwaeta
+				end else begin
+					phase <= 3'b000; //stay in 初期状態
+					executing<=0;
+				end
+				
+			end
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			else if(phase == 3'b101)begin // if Phase 5
+				if(stop_flag==1 ||(executing==1 && exec==0)) begin  // ||executing&exec  wo kuwaeta
+					phase <= 3'b000;
+					executing <= 0;
+				end else begin
+				phase <= 3'b001;
+				
+			
+				end
+			end
+			else begin
+				phase <= phase + 3'b001;
+			end
+			
+			if(hlt==1'b1)begin
+				stop_flag<=1;
+			end
+			//stop_flag<=hlt;
+			
+			
+			
+			 //kokoniarunoha exec tekini mazui
+			
+			
+		end
+	end	
+	control controls(.phase(phase),.S(Flag[3]),.Z(Flag[2]),.C(Flag[1]),
+	.V(Flag[0]),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
+	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
+	,.mem_e(mem_e)
+	,.mem_w(mem_w),.jump(jump) ,.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
+	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.out_s(out_s),.hlt(hlt),.szcv_s(szcv_s),.
+	alu_instruction(alu_instruction));
+	//MEI wo ir nikaeta
+	
+	seven sev(.in(re0),.signal(out_s),.out(seg_out));  //out_s wo 1'b1   ar wo re0
+	 //re0 wo kaeta  mem_out1 wo pc_out
+	
+	szcv_register(.reg_e(clk),.reg_write_en(szcv_s),.reg_in({S,Z,C,V}),.reg_out(Flag));
+	
+	
+	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1) //MEI wo mem_out1
+	, .reg_out(ir)); //ir_e wo 1'b1
+	
+	register_16 AR(.reg_e(clk), .reg_write_en(ar_e), .reg_in(m2)
+	, .reg_out(ar));
+	
+	register_16 BR(.reg_e(clk), .reg_write_en(br_e), .reg_in(m3)
+	, .reg_out(br));
+	
+	register_16 DR(.reg_e(clk), .reg_write_en(dr_e), .reg_in(alu_out)
+	, .reg_out(dr));
+	
+	register_16 MDR(.reg_e(clk),.reg_write_en(mdr_e),.reg_in(m7)
+	,.reg_out(mdr));
+	
+	register_general registerfile(.clk(clk),.rst(rst),
+	.reg_write_en(genr_w)   //reg_e wo genr_w nisita
+	,.reg_write_dest(m5),.reg_write_data(m8),.reg_read_addr_1(ir[13:11])
+	,.reg_read_data_1(re0),.reg_read_addr_2(ir[10:8]),.reg_read_data_2  //MEI wo ir nisita
+	(re1)); 
+	
+	alu_control_unit aluconu(.alu_control_unit_e(clk)
+	,.instruction_six(instruction_six),.ALU_Cnt(ALU_Cnt));
+	
+	alu alu_0( .opcode(ALU_Cnt),.d(ir[3:0])
+	,. alu_in_a(ar), .alu_in_b(br), .alu_out(alu_out), .S(S),.Z(Z)
+	,.C(C),.V(V));   //ar wo 3 br wo1  ALU_Cnt wo ir[7:4]
+	
+	ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out)  
+	,.clock(clk),.q(mem_out1));  
+	
+	//ram01 inst_memory(.data(16'b0),.wren(1'b0),.address(pc_out),.clock(clk),.q(mem_out1));  
+	
+	ram02 data_memory(.data(re0),.wren(mem_w),.
+	address(alu_out),.clock(clk),.q(mem_out2));
+	
+	
+	
+	
+	program_counter pc_0(.clock(clk),.rst(rst),.j_flag(jump)
+	,.j_addr(dr),.phase(phase),.pc_out(pc_out));   
+	
+	sign_extension siex(.d(ir[7:0]),.result(exd)); //ir[7:0] wo 8'b00001111
+	
+	
+	
+	multiplexer_16 m2_0(.mux_s(m2_s),.mux_in_a(re0),.mux_in_b(exd)
+	,.mux_out(m2));
+	
+	multiplexer_16 m3_0(.mux_s(m3_s),.mux_in_a(re1),.mux_in_b(pc_out)
+	,.mux_out(m3));
+	
+	multiplexer_16 m4_0(.mux_s(m4_s),.mux_in_a(dr),.mux_in_b(mdr)
+	,.mux_out(m4));
+	
+	multiplexer_16 m5_0(.mux_s(m5_s),.mux_in_a(ir[13:11]),.mux_in_b(ir[10:8]) //MEI wo ir nisita
+	,.mux_out(m5));
+	
+	multiplexer_16 m6_0(.mux_s(m6_s),.mux_in_a(pc),.mux_in_b(dr)
+	,.mux_out(m6));
+	
+	multiplexer_16 m7_0(.mux_s(m7_s),.mux_in_a(mem_out2),.mux_in_b(in)
+	,.mux_out(m7));
+	
+	multiplexer_16 m8_0(.mux_s(m8_s),.mux_in_a(m4),.mux_in_b(exd)
+	,.mux_out(m8));  //m8_s ga 1 ni nattenai
+
+	assign out=mem_out1;
+	assign out2=pc_out; //br wo re1
+	assign out3=Flag[2];
+	assign out4=jump;
+	
+	endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module control(phase,
+				S,Z,C,V,
+				instruction,
+				aluc_e,
+				ar_e,br_e,dr_e,mdr_e,ir_e, // enablers
+                reg_e, // signal for all non-general registers --> 同期
+				genr_w,
+				//pc_e,
+				mem_e, mem_w,
+				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,out_s,hlt,szcv_s,
+                alu_instruction);
+   input [2:0] phase;
+	input S, Z, C, V;
+	input [15:0] instruction;
+	output reg	aluc_e,
+				ar_e,br_e,dr_e,mdr_e,ir_e, 
+                reg_e,
+				genr_w, 
+				mem_e, mem_w, 
+				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,out_s,szcv_s;
+    output reg hlt;
+	output [5:0] alu_instruction; // ALU制御部へ
+	 
+	 wire [1:0] op = instruction[15:14];
+	 wire [2:0] r1 = instruction[13:11];
+	 wire [2:0] r2 = instruction[10:8];
+	 wire [3:0] alu_op = instruction[7:4];
+	 reg [4:0] command;
+
+    // set the value of alu_instruction depending on the type of instruction
+    // if(op==2'b11) alu_instruction <= { instruction[15:14], instruction[7:4] };
+    // else alu_instruction <=  {instruction[15:10]};
+    assign alu_instruction = (op==2'b11) ? { instruction[15:14], instruction[7:4] } : {instruction[15:10]};
+
+    always @(*) begin        
+        // set the value of "command" depending on the instruction
+        case(op)
+            2'b11: command <= {1'b0,alu_op}; // ALU
+            2'b00: command <= 5'b10000; //LD  r[Ra]=*(r[Rb]+sign_ext(d))
+            2'b01: command <= 5'b10001; //ST  *(r[Rb]+sign_ext(d))=r[Ra]
+            2'b10: begin
+                case(r1)
+                    3'b000: command <= 5'b10010; //LI r[Rb]=sign_ext(d)
+                    3'b100: command <= 5'b10011; //B PC=PC+1+sign_ext(d)
+                    3'b111: begin
+                        case(r2)
+                            3'b000: begin
+											case(Z)
+												1'b1:command<=5'b10100; //BE PC=PC+1+sign_ext(d)
+												1'b0:command<=5'b11000;  //11000 wo 10100
+												default:command<=5'b11000;
+											endcase
+									 end
+									 3'b001: begin
+											case(S^V)
+												1'b1:command<=5'b10101;  //BLT PC=PC+1+sign_ext(d)
+												1'b0:command<=5'b11000;  //11000 wo 10101
+												default:command<=5'b11000;
+											endcase
+									 end
+									 3'b010: begin
+											case(Z||(S^V))
+												1'b1:command<=5'b10110;  //BLE PC=PC+1+sign_ext(d)
+												1'b0:command<=5'b11000;  //11000 wo 10110
+												default:command<=5'b11000;
+											endcase
+									 end
+									 3'b011: begin
+											case(Z)
+												1'b1:command<=5'b11000;   //11000 wo 10111
+												1'b0:command<=5'b10111;  //BNE PC=PC+1+sing_ext(d)
+												default:command<=5'b11000;
+											endcase
+									 end
+									 default:command<=5'b11000;
+                        endcase
+						  end
+						  default:command<=5'b11000;
+                    
+                endcase
+            end
+				default:command<=5'b11000;
+        endcase
+ 
+
+        // alu control unit signal
+        if(phase==3'b000 || command==5'b01100 || command==5'b01101 || command==5'b01111
+        || command== 5'b10010) begin
+            aluc_e <= 0;
+        end else begin
+            aluc_e <= 1;
+        end
+
+        // ar signal
+        if(command== 5'b00000 || command==5'b00001 || command==5'b00010 || command==5'b00011
+        || command==5'b00100 || command==5'b00101 || command==5'b01101 || command==5'b10000
+        || command==5'b10001 || command==5'b10011 || command==5'b10100 || command==5'b10101
+        || command==5'b10110 || command==5'b10111||command==5'b00110) begin
+            ar_e <= 1;
+        end else begin
+            ar_e <= 0;
+        end
+        
+        // br signal
+        if(phase==3'b000 || command==5'b01100 || command==5'b01101 || command==5'b01111
+        || command==5'b10010) begin
+            br_e <= 0;
+        end else begin
+            br_e <= 1;
+        end
+
+        // dr signal
+        if(phase==3'b000 || command==5'b00101 ||  command==5'b01100 || command==5'b01101
+        || command==5'b01111 || command==5'b10010) begin
+            dr_e <= 0;
+        end else begin
+            dr_e <= 1;
+        end
+
+        // mdr signal
+        if(command==5'b01100 || command==5'b10000) begin
+            mdr_e <= 1;
+        end else begin
+            mdr_e <= 0;
+        end
+
+        // ir signal
+        if(phase==3'b000 || command==5'b01111) begin
+            ir_e <= 0;
+        end else begin
+            ir_e <= 1;
+        end
+
+        // the clock for all the registers
+        if(phase==3'b000 || command==5'b01111) begin
+            reg_e <= 0;
+        end else begin
+            reg_e <= 1;
+        end
+
+        // memory read
+        if(phase==3'b000 || command==5'b00101 || command==5'b00110 || command==5'b01111) begin
+            mem_e <= 0;
+        end else begin
+            mem_e <= 1;
+        end
+
+        // jump signal
+        if(command==5'b10011 || command==5'b10100 || command==5'b10101 || command==5'b10110 || 
+        command==5'b10111)begin
+            jump <= 1;
+        end else begin
+            jump <= 0;
+        end
+
+        // mux2 selector
+        if(command==5'b01000 || command==5'b01001 || command==5'b01010 || command==5'b01011
+        || command==5'b10000 || command==5'b10001 || command==5'b10011 || command==5'b10100
+        || command==5'b10101 || command==5'b10110 || command==5'b10111) begin
+            m2_s <= 1;
+        end else begin
+            m2_s <= 0;
+        end
+        
+        // mux3 selector
+        if(command==5'b10011 || command==5'b10100 || command==5'b10101 || command==5'b10110
+        || command==5'b10111) begin
+            m3_s <= 1;
+        end else begin
+            m3_s <= 0;
+        end
+        
+        // mux4 selector
+        if(command==5'b01100 || command==5'b10000) begin
+            m4_s <= 1;
+        end else begin
+            m4_s <= 0;
+        end
+
+        // mux5 selector
+        if(phase==3'b000 || command==5'b00101 || command==5'b01101 || command==5'b01111
+        || command==5'b10000 || command==5'b10001 || command==5'b10011 || command==5'b10100
+        || command==5'b10101 || command==5'b10110 || command==5'b10111) begin
+            m5_s <= 0;
+        end else begin
+            m5_s <= 1;
+        end
+        
+        // mux6 selector
+        if(command==5'b10001) begin
+            m6_s <= 1;
+        end else begin
+            m6_s <= 0;
+        end
+
+        // mux7 selector
+        if(command==5'b01100) begin
+            m7_s <= 1;
+        end else begin
+            m7_s <= 0;
+        end
+
+        // mux8 selector
+        if(command==5'b10010) begin
+            m8_s <= 1;
+        end else begin
+            m8_s <= 0;
+        end
+
+        // output signal (for 7SEG LED)
+        if(command==5'b01101) begin // OUT命令
+            out_s <= 1;
+        end else begin
+            out_s <= 0;
+        end
+
+        // halt flag
+        if(command==5'b01111) begin //HALT命令
+            hlt <= 1;
+        end else begin
+            hlt <= 0;
+        end
+
+        // 汎用レジスタに書き込む
+		if(phase==3'b101 && (command==5'b00000 || command==5'b00001 || command==5'b00010
+        || command==5'b00011 || command==5'b00100 || command==5'b01000 || command==5'b01001
+        || command==5'b01010 || command==5'b01011 || command==5'b01100 || command==5'b10000
+        || command==5'b10010||command==5'b00110))begin
+			genr_w<=1;
+		end else begin
+			genr_w<=0;
+		end
+		
+        // メモリに書き込む
+		if(phase==3'b101 && command==5'b10001)begin
+			mem_w<=1;
+		end else begin
+			mem_w<=0;
+		end
+		
+		if(phase==3'b101&&(command==5'b00000 || command==5'b00001 || command==5'b00010
+        || command==5'b00011 || command==5'b00100 || command==5'b00101 || command==5'b00110
+        || command==5'b01000 || command==5'b01001 || command==5'b01010 || command==5'b01011
+        ))begin
+			szcv_s<=1'b1;
+		end else begin
+			szcv_s<=1'b0;
+		end
+    end // alwaysのend
+
+endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
