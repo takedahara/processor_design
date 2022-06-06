@@ -1,5 +1,5 @@
 Flow report for simple
-Mon Jun 06 13:39:10 2022
+Mon Jun 06 14:27:40 2022
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Jun 06 13:39:10 2022       ;
+; Flow Status                        ; Successful - Mon Jun 06 14:27:40 2022       ;
 ; Quartus Prime Version              ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; simple                                      ;
 ; Top-level Entity Name              ; simple                                      ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/06/2022 13:37:42 ;
+; Start date & time ; 06/06/2022 14:26:13 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; simple              ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+---------------------------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                                   ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+---------------------------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 231453550859982.165449026127876                         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 231453550859982.165449317225132                         ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                      ; --            ; --          ; test1          ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                      ; --            ; --          ; test2          ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; test1                                                   ; --            ; --          ; eda_simulation ;
@@ -108,12 +108,12 @@ refer to the applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:48     ; 1.0                     ; 4834 MB             ; 00:01:28                           ;
+; Analysis & Synthesis      ; 00:00:47     ; 1.0                     ; 4835 MB             ; 00:01:25                           ;
 ; Fitter                    ; 00:00:16     ; 1.0                     ; 5302 MB             ; 00:00:20                           ;
-; Assembler                 ; 00:00:04     ; 1.0                     ; 4680 MB             ; 00:00:04                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 4683 MB             ; 00:00:03                           ;
 ; TimeQuest Timing Analyzer ; 00:00:06     ; 1.1                     ; 4779 MB             ; 00:00:06                           ;
 ; EDA Netlist Writer        ; 00:00:06     ; 1.0                     ; 4668 MB             ; 00:00:07                           ;
-; Total                     ; 00:01:20     ; --                      ; --                  ; 00:02:05                           ;
+; Total                     ; 00:01:19     ; --                      ; --                  ; 00:02:01                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

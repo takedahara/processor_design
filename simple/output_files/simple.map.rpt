@@ -1,5 +1,5 @@
 Analysis & Synthesis report for simple
-Mon Jun 06 13:38:30 2022
+Mon Jun 06 14:27:00 2022
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -59,7 +59,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Jun 06 13:38:30 2022       ;
+; Analysis & Synthesis Status        ; Successful - Mon Jun 06 14:27:00 2022       ;
 ; Quartus Prime Version              ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; simple                                      ;
 ; Top-level Entity Name              ; simple                                      ;
@@ -179,55 +179,55 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                                                               ;
-+--------------------------------------------------------------------+-----------------+----------------------------------------------+--------------------------------------------------------------------------------------------------+-------------+
-; File Name with User-Entered Path                                   ; Used in Netlist ; File Type                                    ; File Name with Absolute Path                                                                     ; Library     ;
-+--------------------------------------------------------------------+-----------------+----------------------------------------------+--------------------------------------------------------------------------------------------------+-------------+
-; ../../2022-simple-team04/displaydigit.v                            ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/displaydigit.v                                                 ;             ;
-; ../../2022-simple-team04/seven.v                                   ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/seven.v                                                        ;             ;
-; ../multiplexer_16/multiplexer_16.v                                 ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/multiplexer_16/multiplexer_16.v                                           ;             ;
-; ../register_16/register_16.v                                       ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/register_16/register_16.v                                                 ;             ;
-; ../program_counter/program_counter.v                               ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/program_counter/program_counter.v                                         ;             ;
-; ../control/control.v                                               ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/control/control.v                                                         ;             ;
-; ../alu/alu.v                                                       ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/alu/alu.v                                                                 ;             ;
-; simple.v                                                           ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/simple.v                                                           ;             ;
-; register_general.v                                                 ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/register_general.v                                                 ;             ;
-; alu_control_unit.v                                                 ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/alu_control_unit.v                                                 ;             ;
-; sign_extension.v                                                   ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/sign_extension.v                                                   ;             ;
-; ram01.v                                                            ; yes             ; User Wizard-Generated File                   ; C:/Users/admin/Desktop/simple/ram01.v                                                            ;             ;
-; Mif1.mif                                                           ; yes             ; User Memory Initialization File              ; C:/Users/admin/Desktop/simple/Mif1.mif                                                           ;             ;
-; ram02.v                                                            ; yes             ; User Wizard-Generated File                   ; C:/Users/admin/Desktop/simple/ram02.v                                                            ;             ;
-; Mif2.mif                                                           ; yes             ; User Memory Initialization File              ; C:/Users/admin/Desktop/simple/Mif2.mif                                                           ;             ;
-; szcv_register.v                                                    ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/szcv_register.v                                                    ;             ;
-; output_files/sign_ext_im.v                                         ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/output_files/sign_ext_im.v                                         ;             ;
-; SEG_SEL.v                                                          ; yes             ; User Verilog HDL File                        ; C:/Users/admin/Desktop/simple/SEG_SEL.v                                                          ;             ;
-; altsyncram.tdf                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altsyncram.tdf                            ;             ;
-; stratix_ram_block.inc                                              ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/stratix_ram_block.inc                     ;             ;
-; lpm_mux.inc                                                        ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/lpm_mux.inc                               ;             ;
-; lpm_decode.inc                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/lpm_decode.inc                            ;             ;
-; aglobal171.inc                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/aglobal171.inc                            ;             ;
-; a_rdenreg.inc                                                      ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/a_rdenreg.inc                             ;             ;
-; altrom.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altrom.inc                                ;             ;
-; altram.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altram.inc                                ;             ;
-; altdpram.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altdpram.inc                              ;             ;
-; db/altsyncram_s3k1.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/Desktop/simple/db/altsyncram_s3k1.tdf                                             ;             ;
-; db/altsyncram_qda2.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/Desktop/simple/db/altsyncram_qda2.tdf                                             ;             ;
-; sld_mod_ram_rom.vhd                                                ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_mod_ram_rom.vhd                       ;             ;
-; sld_jtag_endpoint_adapter.vhd                                      ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter.vhd             ;             ;
-; sld_jtag_endpoint_adapter_impl.sv                                  ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter_impl.sv         ;             ;
-; sld_rom_sr.vhd                                                     ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_rom_sr.vhd                            ;             ;
-; db/altsyncram_t3k1.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/Desktop/simple/db/altsyncram_t3k1.tdf                                             ;             ;
-; db/altsyncram_rda2.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/Desktop/simple/db/altsyncram_rda2.tdf                                             ;             ;
-; sld_hub.vhd                                                        ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_hub.vhd                               ; altera_sld  ;
-; db/ip/sld6c6326ae/alt_sld_fab.v                                    ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/alt_sld_fab.v                                    ; alt_sld_fab ;
-; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v             ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v             ; alt_sld_fab ;
-; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; yes             ; Auto-Found SystemVerilog HDL File            ; C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; alt_sld_fab ;
-; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; alt_sld_fab ;
-; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; yes             ; Encrypted Auto-Found VHDL File               ; C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; alt_sld_fab ;
-; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; alt_sld_fab ;
-; sld_jtag_hub.vhd                                                   ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_hub.vhd                          ;             ;
-+--------------------------------------------------------------------+-----------------+----------------------------------------------+--------------------------------------------------------------------------------------------------+-------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                          ;
++--------------------------------------------------------------------+-----------------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------+-------------+
+; File Name with User-Entered Path                                   ; Used in Netlist ; File Type                                    ; File Name with Absolute Path                                                                                ; Library     ;
++--------------------------------------------------------------------+-----------------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------+-------------+
+; ../control.v                                                       ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/control.v                                                                 ;             ;
+; ../program_counter.v                                               ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/program_counter.v                                                         ;             ;
+; ../alu.v                                                           ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/alu.v                                                                     ;             ;
+; ../register_16.v                                                   ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/register_16.v                                                             ;             ;
+; ../displaydigit.v                                                  ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/displaydigit.v                                                            ;             ;
+; ../seven.v                                                         ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/seven.v                                                                   ;             ;
+; simple.v                                                           ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/simple.v                                                           ;             ;
+; register_general.v                                                 ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/register_general.v                                                 ;             ;
+; alu_control_unit.v                                                 ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/alu_control_unit.v                                                 ;             ;
+; sign_extension.v                                                   ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/sign_extension.v                                                   ;             ;
+; multiplexer_16.v                                                   ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/multiplexer_16.v                                                   ;             ;
+; ram01.v                                                            ; yes             ; User Wizard-Generated File                   ; C:/Users/admin/2022-simple-team04/simple/ram01.v                                                            ;             ;
+; Mif1.mif                                                           ; yes             ; User Memory Initialization File              ; C:/Users/admin/2022-simple-team04/simple/Mif1.mif                                                           ;             ;
+; ram02.v                                                            ; yes             ; User Wizard-Generated File                   ; C:/Users/admin/2022-simple-team04/simple/ram02.v                                                            ;             ;
+; Mif2.mif                                                           ; yes             ; User Memory Initialization File              ; C:/Users/admin/2022-simple-team04/simple/Mif2.mif                                                           ;             ;
+; szcv_register.v                                                    ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/szcv_register.v                                                    ;             ;
+; output_files/sign_ext_im.v                                         ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/output_files/sign_ext_im.v                                         ;             ;
+; SEG_SEL.v                                                          ; yes             ; User Verilog HDL File                        ; C:/Users/admin/2022-simple-team04/simple/SEG_SEL.v                                                          ;             ;
+; altsyncram.tdf                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altsyncram.tdf                                       ;             ;
+; stratix_ram_block.inc                                              ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/stratix_ram_block.inc                                ;             ;
+; lpm_mux.inc                                                        ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/lpm_mux.inc                                          ;             ;
+; lpm_decode.inc                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/lpm_decode.inc                                       ;             ;
+; aglobal171.inc                                                     ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/aglobal171.inc                                       ;             ;
+; a_rdenreg.inc                                                      ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/a_rdenreg.inc                                        ;             ;
+; altrom.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altrom.inc                                           ;             ;
+; altram.inc                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altram.inc                                           ;             ;
+; altdpram.inc                                                       ; yes             ; Megafunction                                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altdpram.inc                                         ;             ;
+; db/altsyncram_s3k1.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/2022-simple-team04/simple/db/altsyncram_s3k1.tdf                                             ;             ;
+; db/altsyncram_qda2.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/2022-simple-team04/simple/db/altsyncram_qda2.tdf                                             ;             ;
+; sld_mod_ram_rom.vhd                                                ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_mod_ram_rom.vhd                                  ;             ;
+; sld_jtag_endpoint_adapter.vhd                                      ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter.vhd                        ;             ;
+; sld_jtag_endpoint_adapter_impl.sv                                  ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter_impl.sv                    ;             ;
+; sld_rom_sr.vhd                                                     ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_rom_sr.vhd                                       ;             ;
+; db/altsyncram_t3k1.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/2022-simple-team04/simple/db/altsyncram_t3k1.tdf                                             ;             ;
+; db/altsyncram_rda2.tdf                                             ; yes             ; Auto-Generated Megafunction                  ; C:/Users/admin/2022-simple-team04/simple/db/altsyncram_rda2.tdf                                             ;             ;
+; sld_hub.vhd                                                        ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_hub.vhd                                          ; altera_sld  ;
+; db/ip/sld6c6326ae/alt_sld_fab.v                                    ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/alt_sld_fab.v                                    ; alt_sld_fab ;
+; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v             ; yes             ; Encrypted Auto-Found Verilog HDL File        ; C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v             ; alt_sld_fab ;
+; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; yes             ; Auto-Found SystemVerilog HDL File            ; C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv      ; alt_sld_fab ;
+; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv   ; alt_sld_fab ;
+; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; yes             ; Encrypted Auto-Found VHDL File               ; C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd ; alt_sld_fab ;
+; db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; yes             ; Encrypted Auto-Found SystemVerilog HDL File  ; C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv   ; alt_sld_fab ;
+; sld_jtag_hub.vhd                                                   ; yes             ; Encrypted Megafunction                       ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_hub.vhd                                     ;             ;
++--------------------------------------------------------------------+-----------------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------+-------------+
 
 
 +------------------------------------------------------------------------+
@@ -616,15 +616,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "control:controls"                                                                              ;
-+-----------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port            ; Type   ; Severity ; Details                                                                             ;
-+-----------------+--------+----------+-------------------------------------------------------------------------------------+
-; aluc_e          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; mem_e           ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; alu_instruction ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-----------------+--------+----------+-------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "control:controls"                                                                                                                             ;
++-----------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------+
+; Port            ; Type   ; Severity ; Details                                                                                                                            ;
++-----------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------+
+; aluc_e          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                ;
+; mem_e           ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                ;
+; alu_instruction ; Output ; Warning  ; Output or bidir port (6 bits) is wider than the port expression (1 bits) it drives; bit(s) "alu_instruction[5..1]" have no fanouts ;
+; alu_instruction ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                ;
++-----------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -682,75 +683,75 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Mon Jun 06 13:37:40 2022
+    Info: Processing started: Mon Jun 06 14:26:11 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off simple -c simple
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/2022-simple-team04/control.v
+    Info (12023): Found entity 1: control File: C:/Users/admin/2022-simple-team04/control.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/2022-simple-team04/program_counter.v
+    Info (12023): Found entity 1: program_counter File: C:/Users/admin/2022-simple-team04/program_counter.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/2022-simple-team04/alu.v
+    Info (12023): Found entity 1: alu File: C:/Users/admin/2022-simple-team04/alu.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/2022-simple-team04/register_16.v
+    Info (12023): Found entity 1: register_16 File: C:/Users/admin/2022-simple-team04/register_16.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/2022-simple-team04/displaydigit.v
     Info (12023): Found entity 1: displaydigit File: C:/Users/admin/2022-simple-team04/displaydigit.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/2022-simple-team04/seven.v
     Info (12023): Found entity 1: seven File: C:/Users/admin/2022-simple-team04/seven.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/multiplexer_16/multiplexer_16.v
-    Info (12023): Found entity 1: multiplexer_16 File: C:/Users/admin/Desktop/multiplexer_16/multiplexer_16.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/hanyouregister_16/demultiplex.v
-    Info (12023): Found entity 1: demultiplex File: C:/Users/admin/Desktop/hanyouregister_16/demultiplex.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/register_16/register_16.v
-    Info (12023): Found entity 1: register_16 File: C:/Users/admin/Desktop/register_16/register_16.v Line: 1
-Info (12021): Found 0 design units, including 0 entities, in source file /users/admin/desktop/ram/ram.v
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/program_counter/program_counter.v
-    Info (12023): Found entity 1: program_counter File: C:/Users/admin/Desktop/program_counter/program_counter.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/control/control.v
-    Info (12023): Found entity 1: control File: C:/Users/admin/Desktop/control/control.v Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/alu/alu.v
-    Info (12023): Found entity 1: alu File: C:/Users/admin/Desktop/alu/alu.v Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/add/add.v
-    Info (12023): Found entity 1: Add File: C:/Users/admin/Desktop/Add/Add.v Line: 1
+Warning (12019): Can't analyze file -- file ../multiplexer_16/multiplexer_16.v is missing
+Warning (12019): Can't analyze file -- file ../hanyouregister_16/demultiplex.v is missing
+Warning (12019): Can't analyze file -- file ../register_16/register_16.v is missing
+Warning (12019): Can't analyze file -- file ../ram/ram.v is missing
+Warning (12019): Can't analyze file -- file ../program_counter/program_counter.v is missing
+Warning (12019): Can't analyze file -- file ../control/control.v is missing
+Warning (12019): Can't analyze file -- file ../alu/alu.v is missing
+Warning (12019): Can't analyze file -- file ../Add/Add.v is missing
 Info (12021): Found 1 design units, including 1 entities, in source file simple.v
-    Info (12023): Found entity 1: simple File: C:/Users/admin/Desktop/simple/simple.v Line: 3
+    Info (12023): Found entity 1: simple File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file register_general.v
-    Info (12023): Found entity 1: register_general File: C:/Users/admin/Desktop/simple/register_general.v Line: 1
+    Info (12023): Found entity 1: register_general File: C:/Users/admin/2022-simple-team04/simple/register_general.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file alu_control_unit.v
-    Info (12023): Found entity 1: alu_control_unit File: C:/Users/admin/Desktop/simple/alu_control_unit.v Line: 1
+    Info (12023): Found entity 1: alu_control_unit File: C:/Users/admin/2022-simple-team04/simple/alu_control_unit.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file sign_extension.v
-    Info (12023): Found entity 1: sign_extension File: C:/Users/admin/Desktop/simple/sign_extension.v Line: 2
+    Info (12023): Found entity 1: sign_extension File: C:/Users/admin/2022-simple-team04/simple/sign_extension.v Line: 2
 Info (12021): Found 0 design units, including 0 entities, in source file multi3.v
-Info (15248): File "C:/Users/admin/Desktop/simple/multiplexer_16.v" is a duplicate of already analyzed file "C:/Users/admin/Desktop/multiplexer_16/multiplexer_16.v" (same filename, same library name and same md5 digest). Skipping analysis of this file.
-Info (12021): Found 0 design units, including 0 entities, in source file multiplexer_16.v
-Info (12021): Found 1 design units, including 1 entities, in source file /users/admin/desktop/register_16/register_16_new.v
-    Info (12023): Found entity 1: register_16_new File: C:/Users/admin/Desktop/register_16/register_16_new.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file multiplexer_16.v
+    Info (12023): Found entity 1: multiplexer_16 File: C:/Users/admin/2022-simple-team04/simple/multiplexer_16.v Line: 1
+Warning (12019): Can't analyze file -- file ../register_16/register_16_new.v is missing
 Info (12021): Found 1 design units, including 1 entities, in source file ram01.v
-    Info (12023): Found entity 1: ram01 File: C:/Users/admin/Desktop/simple/ram01.v Line: 39
+    Info (12023): Found entity 1: ram01 File: C:/Users/admin/2022-simple-team04/simple/ram01.v Line: 39
 Info (12021): Found 1 design units, including 1 entities, in source file ram02.v
-    Info (12023): Found entity 1: ram02 File: C:/Users/admin/Desktop/simple/ram02.v Line: 39
+    Info (12023): Found entity 1: ram02 File: C:/Users/admin/2022-simple-team04/simple/ram02.v Line: 39
 Info (12021): Found 1 design units, including 1 entities, in source file szcv_register.v
-    Info (12023): Found entity 1: szcv_register File: C:/Users/admin/Desktop/simple/szcv_register.v Line: 1
+    Info (12023): Found entity 1: szcv_register File: C:/Users/admin/2022-simple-team04/simple/szcv_register.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file output_files/sign_ext_im.v
-    Info (12023): Found entity 1: sign_ext_im File: C:/Users/admin/Desktop/simple/output_files/sign_ext_im.v Line: 1
+    Info (12023): Found entity 1: sign_ext_im File: C:/Users/admin/2022-simple-team04/simple/output_files/sign_ext_im.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file seg_sel.v
-    Info (12023): Found entity 1: SEG_SEL File: C:/Users/admin/Desktop/simple/SEG_SEL.v Line: 1
-Warning (10236): Verilog HDL Implicit Net warning at alu.v(78): created implicit net for "ADD" File: C:/Users/admin/Desktop/alu/alu.v Line: 78
-Warning (10236): Verilog HDL Implicit Net warning at simple.v(136): created implicit net for "genr_w" File: C:/Users/admin/Desktop/simple/simple.v Line: 136
-Warning (10236): Verilog HDL Implicit Net warning at simple.v(140): created implicit net for "alu_instruction" File: C:/Users/admin/Desktop/simple/simple.v Line: 140
+    Info (12023): Found entity 1: SEG_SEL File: C:/Users/admin/2022-simple-team04/simple/SEG_SEL.v Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at alu.v(78): created implicit net for "ADD" File: C:/Users/admin/2022-simple-team04/alu.v Line: 78
+Warning (10236): Verilog HDL Implicit Net warning at simple.v(136): created implicit net for "genr_w" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 136
+Warning (10236): Verilog HDL Implicit Net warning at simple.v(140): created implicit net for "alu_instruction" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 140
 Info (12127): Elaborating entity "simple" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at simple.v(64): object "rst_n" assigned a value but never read File: C:/Users/admin/Desktop/simple/simple.v Line: 64
-Warning (10036): Verilog HDL or VHDL warning at simple.v(65): object "exec_n" assigned a value but never read File: C:/Users/admin/Desktop/simple/simple.v Line: 65
-Info (12128): Elaborating entity "control" for hierarchy "control:controls" File: C:/Users/admin/Desktop/simple/simple.v Line: 140
-Info (12128): Elaborating entity "seven" for hierarchy "seven:sev" File: C:/Users/admin/Desktop/simple/simple.v Line: 143
+Warning (10036): Verilog HDL or VHDL warning at simple.v(64): object "rst_n" assigned a value but never read File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 64
+Warning (10036): Verilog HDL or VHDL warning at simple.v(65): object "exec_n" assigned a value but never read File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 65
+Info (12128): Elaborating entity "control" for hierarchy "control:controls" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 140
+Info (12128): Elaborating entity "seven" for hierarchy "seven:sev" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 143
 Info (12128): Elaborating entity "displaydigit" for hierarchy "seven:sev|displaydigit:digit1" File: C:/Users/admin/2022-simple-team04/seven.v Line: 11
-Info (12128): Elaborating entity "SEG_SEL" for hierarchy "SEG_SEL:seg_SEL" File: C:/Users/admin/Desktop/simple/simple.v Line: 150
-Info (12128): Elaborating entity "szcv_register" for hierarchy "szcv_register:szcv_regi" File: C:/Users/admin/Desktop/simple/simple.v Line: 152
-Info (12128): Elaborating entity "register_16" for hierarchy "register_16:IR" File: C:/Users/admin/Desktop/simple/simple.v Line: 156
-Info (12128): Elaborating entity "register_general" for hierarchy "register_general:registerfile" File: C:/Users/admin/Desktop/simple/simple.v Line: 174
-Info (12128): Elaborating entity "alu_control_unit" for hierarchy "alu_control_unit:aluconu" File: C:/Users/admin/Desktop/simple/simple.v Line: 177
-Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_0" File: C:/Users/admin/Desktop/simple/simple.v Line: 181
-Warning (10036): Verilog HDL or VHDL warning at alu.v(78): object "ADD" assigned a value but never read File: C:/Users/admin/Desktop/alu/alu.v Line: 78
-Warning (10036): Verilog HDL or VHDL warning at alu.v(75): object "shift" assigned a value but never read File: C:/Users/admin/Desktop/alu/alu.v Line: 75
-Warning (10230): Verilog HDL assignment warning at alu.v(78): truncated value with size 17 to match size of target (1) File: C:/Users/admin/Desktop/alu/alu.v Line: 78
-Warning (10230): Verilog HDL assignment warning at alu.v(79): truncated value with size 32 to match size of target (1) File: C:/Users/admin/Desktop/alu/alu.v Line: 79
-Info (12128): Elaborating entity "ram01" for hierarchy "ram01:inst_memory" File: C:/Users/admin/Desktop/simple/simple.v Line: 184
-Info (12128): Elaborating entity "altsyncram" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component" File: C:/Users/admin/Desktop/simple/ram01.v Line: 85
-Info (12130): Elaborated megafunction instantiation "ram01:inst_memory|altsyncram:altsyncram_component" File: C:/Users/admin/Desktop/simple/ram01.v Line: 85
-Info (12133): Instantiated megafunction "ram01:inst_memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/admin/Desktop/simple/ram01.v Line: 85
+Info (12128): Elaborating entity "SEG_SEL" for hierarchy "SEG_SEL:seg_SEL" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 150
+Info (12128): Elaborating entity "szcv_register" for hierarchy "szcv_register:szcv_regi" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 152
+Info (12128): Elaborating entity "register_16" for hierarchy "register_16:IR" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 156
+Info (12128): Elaborating entity "register_general" for hierarchy "register_general:registerfile" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 174
+Info (12128): Elaborating entity "alu_control_unit" for hierarchy "alu_control_unit:aluconu" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 177
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_0" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 181
+Warning (10036): Verilog HDL or VHDL warning at alu.v(78): object "ADD" assigned a value but never read File: C:/Users/admin/2022-simple-team04/alu.v Line: 78
+Warning (10036): Verilog HDL or VHDL warning at alu.v(75): object "shift" assigned a value but never read File: C:/Users/admin/2022-simple-team04/alu.v Line: 75
+Warning (10230): Verilog HDL assignment warning at alu.v(78): truncated value with size 17 to match size of target (1) File: C:/Users/admin/2022-simple-team04/alu.v Line: 78
+Warning (10230): Verilog HDL assignment warning at alu.v(79): truncated value with size 32 to match size of target (1) File: C:/Users/admin/2022-simple-team04/alu.v Line: 79
+Info (12128): Elaborating entity "ram01" for hierarchy "ram01:inst_memory" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 184
+Info (12128): Elaborating entity "altsyncram" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component" File: C:/Users/admin/2022-simple-team04/simple/ram01.v Line: 85
+Info (12130): Elaborated megafunction instantiation "ram01:inst_memory|altsyncram:altsyncram_component" File: C:/Users/admin/2022-simple-team04/simple/ram01.v Line: 85
+Info (12133): Instantiated megafunction "ram01:inst_memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/admin/2022-simple-team04/simple/ram01.v Line: 85
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "init_file" = "Mif1.mif"
@@ -767,14 +768,14 @@ Info (12133): Instantiated megafunction "ram01:inst_memory|altsyncram:altsyncram
     Info (12134): Parameter "width_a" = "16"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_s3k1.tdf
-    Info (12023): Found entity 1: altsyncram_s3k1 File: C:/Users/admin/Desktop/simple/db/altsyncram_s3k1.tdf Line: 27
+    Info (12023): Found entity 1: altsyncram_s3k1 File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_s3k1.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_s3k1" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated" File: c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_qda2.tdf
-    Info (12023): Found entity 1: altsyncram_qda2 File: C:/Users/admin/Desktop/simple/db/altsyncram_qda2.tdf Line: 27
-Info (12128): Elaborating entity "altsyncram_qda2" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|altsyncram_qda2:altsyncram1" File: C:/Users/admin/Desktop/simple/db/altsyncram_s3k1.tdf Line: 36
-Info (12128): Elaborating entity "sld_mod_ram_rom" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2" File: C:/Users/admin/Desktop/simple/db/altsyncram_s3k1.tdf Line: 37
-Info (12130): Elaborated megafunction instantiation "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2" File: C:/Users/admin/Desktop/simple/db/altsyncram_s3k1.tdf Line: 37
-Info (12133): Instantiated megafunction "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2" with the following parameter: File: C:/Users/admin/Desktop/simple/db/altsyncram_s3k1.tdf Line: 37
+    Info (12023): Found entity 1: altsyncram_qda2 File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_qda2.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_qda2" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|altsyncram_qda2:altsyncram1" File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_s3k1.tdf Line: 36
+Info (12128): Elaborating entity "sld_mod_ram_rom" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2" File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_s3k1.tdf Line: 37
+Info (12130): Elaborated megafunction instantiation "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2" File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_s3k1.tdf Line: 37
+Info (12133): Instantiated megafunction "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2" with the following parameter: File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_s3k1.tdf Line: 37
     Info (12134): Parameter "CVALUE" = "0000000000000000"
     Info (12134): Parameter "IS_DATA_IN_RAM" = "1"
     Info (12134): Parameter "IS_READABLE" = "1"
@@ -786,10 +787,10 @@ Info (12133): Instantiated megafunction "ram01:inst_memory|altsyncram:altsyncram
 Info (12128): Elaborating entity "sld_jtag_endpoint_adapter" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2|sld_jtag_endpoint_adapter:jtag_signal_adapter" File: c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_mod_ram_rom.vhd Line: 302
 Info (12128): Elaborating entity "sld_jtag_endpoint_adapter_impl" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2|sld_jtag_endpoint_adapter:jtag_signal_adapter|sld_jtag_endpoint_adapter_impl:sld_jtag_endpoint_adapter_impl_inst" File: c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_jtag_endpoint_adapter.vhd Line: 232
 Info (12128): Elaborating entity "sld_rom_sr" for hierarchy "ram01:inst_memory|altsyncram:altsyncram_component|altsyncram_s3k1:auto_generated|sld_mod_ram_rom:mgl_prim2|sld_rom_sr:\ram_rom_logic_gen:no_name_gen:info_rom_sr" File: c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sld_mod_ram_rom.vhd Line: 799
-Info (12128): Elaborating entity "ram02" for hierarchy "ram02:data_memory" File: C:/Users/admin/Desktop/simple/simple.v Line: 189
-Info (12128): Elaborating entity "altsyncram" for hierarchy "ram02:data_memory|altsyncram:altsyncram_component" File: C:/Users/admin/Desktop/simple/ram02.v Line: 85
-Info (12130): Elaborated megafunction instantiation "ram02:data_memory|altsyncram:altsyncram_component" File: C:/Users/admin/Desktop/simple/ram02.v Line: 85
-Info (12133): Instantiated megafunction "ram02:data_memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/admin/Desktop/simple/ram02.v Line: 85
+Info (12128): Elaborating entity "ram02" for hierarchy "ram02:data_memory" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 189
+Info (12128): Elaborating entity "altsyncram" for hierarchy "ram02:data_memory|altsyncram:altsyncram_component" File: C:/Users/admin/2022-simple-team04/simple/ram02.v Line: 85
+Info (12130): Elaborated megafunction instantiation "ram02:data_memory|altsyncram:altsyncram_component" File: C:/Users/admin/2022-simple-team04/simple/ram02.v Line: 85
+Info (12133): Instantiated megafunction "ram02:data_memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/admin/2022-simple-team04/simple/ram02.v Line: 85
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "init_file" = "Mif2.mif"
@@ -806,17 +807,17 @@ Info (12133): Instantiated megafunction "ram02:data_memory|altsyncram:altsyncram
     Info (12134): Parameter "width_a" = "16"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_t3k1.tdf
-    Info (12023): Found entity 1: altsyncram_t3k1 File: C:/Users/admin/Desktop/simple/db/altsyncram_t3k1.tdf Line: 27
+    Info (12023): Found entity 1: altsyncram_t3k1 File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_t3k1.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_t3k1" for hierarchy "ram02:data_memory|altsyncram:altsyncram_component|altsyncram_t3k1:auto_generated" File: c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_rda2.tdf
-    Info (12023): Found entity 1: altsyncram_rda2 File: C:/Users/admin/Desktop/simple/db/altsyncram_rda2.tdf Line: 27
-Info (12128): Elaborating entity "altsyncram_rda2" for hierarchy "ram02:data_memory|altsyncram:altsyncram_component|altsyncram_t3k1:auto_generated|altsyncram_rda2:altsyncram1" File: C:/Users/admin/Desktop/simple/db/altsyncram_t3k1.tdf Line: 36
-Info (12128): Elaborating entity "program_counter" for hierarchy "program_counter:pc_0" File: C:/Users/admin/Desktop/simple/simple.v Line: 195
-Info (12128): Elaborating entity "sign_extension" for hierarchy "sign_extension:siex" File: C:/Users/admin/Desktop/simple/simple.v Line: 197
-Info (12128): Elaborating entity "sign_ext_im" for hierarchy "sign_ext_im:sign_ext_IM" File: C:/Users/admin/Desktop/simple/simple.v Line: 199
-Info (12128): Elaborating entity "multiplexer_16" for hierarchy "multiplexer_16:m2_0" File: C:/Users/admin/Desktop/simple/simple.v Line: 203
+    Info (12023): Found entity 1: altsyncram_rda2 File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_rda2.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_rda2" for hierarchy "ram02:data_memory|altsyncram:altsyncram_component|altsyncram_t3k1:auto_generated|altsyncram_rda2:altsyncram1" File: C:/Users/admin/2022-simple-team04/simple/db/altsyncram_t3k1.tdf Line: 36
+Info (12128): Elaborating entity "program_counter" for hierarchy "program_counter:pc_0" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 195
+Info (12128): Elaborating entity "sign_extension" for hierarchy "sign_extension:siex" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 197
+Info (12128): Elaborating entity "sign_ext_im" for hierarchy "sign_ext_im:sign_ext_IM" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 199
+Info (12128): Elaborating entity "multiplexer_16" for hierarchy "multiplexer_16:m2_0" File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 203
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2022.06.06.13:38:11 Progress: Loading sld6c6326ae/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2022.06.06.14:26:41 Progress: Loading sld6c6326ae/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -827,76 +828,76 @@ Info (11172): Ident: "alt_sld_fab" instantiated altera_connection_identification
 Info (11172): Alt_sld_fab: Done "alt_sld_fab" with 6 modules, 6 files
 Info (11171): Finished IP generation for the debug fabric: alt_sld_fab.
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld6c6326ae/alt_sld_fab.v
-    Info (12023): Found entity 1: alt_sld_fab File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/alt_sld_fab.v Line: 9
+    Info (12023): Found entity 1: alt_sld_fab File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/alt_sld_fab.v Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v Line: 9
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab.v Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_ident File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv Line: 33
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_ident File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_ident.sv Line: 33
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_presplit File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv Line: 3
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_presplit File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_presplit.sv Line: 3
 Info (12021): Found 2 design units, including 1 entities, in source file db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd
-    Info (12022): Found design unit 1: alt_sld_fab_alt_sld_fab_sldfabric-rtl File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 142
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_sldfabric File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 11
+    Info (12022): Found design unit 1: alt_sld_fab_alt_sld_fab_sldfabric-rtl File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 142
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_sldfabric File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_sldfabric.vhd Line: 11
 Info (12021): Found 1 design units, including 1 entities, in source file db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv
-    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_splitter File: C:/Users/admin/Desktop/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv Line: 3
-Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+    Info (12023): Found entity 1: alt_sld_fab_alt_sld_fab_splitter File: C:/Users/admin/2022-simple-team04/simple/db/ip/sld6c6326ae/submodules/alt_sld_fab_alt_sld_fab_splitter.sv Line: 3
+Warning (12241): 5 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "out3[1]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[2]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[3]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[4]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[5]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[6]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[7]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[8]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[9]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[10]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[11]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[12]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[13]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[14]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out3[15]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 12
-    Warning (13410): Pin "out4[1]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[2]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[3]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[4]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[5]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[6]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[7]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[8]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[9]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[10]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[11]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[12]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[13]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[14]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[15]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[16]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[17]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[18]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[19]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[20]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[21]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[22]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[23]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[24]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[25]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[26]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[27]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[28]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[29]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[30]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "out4[31]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 13
-    Warning (13410): Pin "seg_out[0]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 14
-    Warning (13410): Pin "seg_out[8]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 14
-    Warning (13410): Pin "seg_out[16]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 14
-    Warning (13410): Pin "seg_out[24]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 14
-    Warning (13410): Pin "seg_out_2[0]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 15
-    Warning (13410): Pin "seg_out_2[8]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 15
-    Warning (13410): Pin "seg_out_2[16]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 15
-    Warning (13410): Pin "seg_out_2[24]" is stuck at GND File: C:/Users/admin/Desktop/simple/simple.v Line: 15
+    Warning (13410): Pin "out3[1]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[2]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[3]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[4]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[5]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[6]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[7]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[8]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[9]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[10]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[11]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[12]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[13]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[14]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out3[15]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 12
+    Warning (13410): Pin "out4[1]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[2]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[3]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[4]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[5]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[6]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[7]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[8]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[9]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[10]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[11]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[12]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[13]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[14]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[15]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[16]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[17]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[18]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[19]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[20]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[21]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[22]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[23]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[24]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[25]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[26]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[27]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[28]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[29]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[30]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "out4[31]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 13
+    Warning (13410): Pin "seg_out[0]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 14
+    Warning (13410): Pin "seg_out[8]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 14
+    Warning (13410): Pin "seg_out[16]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 14
+    Warning (13410): Pin "seg_out[24]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 14
+    Warning (13410): Pin "seg_out_2[0]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 15
+    Warning (13410): Pin "seg_out_2[8]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 15
+    Warning (13410): Pin "seg_out_2[16]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 15
+    Warning (13410): Pin "seg_out_2[24]" is stuck at GND File: C:/Users/admin/2022-simple-team04/simple/simple.v Line: 15
 Info (286031): Timing-Driven Synthesis is running on partition "Top"
-Info (144001): Generated suppressed messages file C:/Users/admin/Desktop/simple/output_files/simple.map.smsg
+Info (144001): Generated suppressed messages file C:/Users/admin/2022-simple-team04/simple/output_files/simple.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Info (21057): Implemented 1536 device resources after synthesis - the final resource count might be different
@@ -904,16 +905,16 @@ Info (21057): Implemented 1536 device resources after synthesis - the final reso
     Info (21059): Implemented 156 output pins
     Info (21061): Implemented 1325 logic cells
     Info (21064): Implemented 32 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 66 warnings
-    Info: Peak virtual memory: 4834 megabytes
-    Info: Processing ended: Mon Jun 06 13:38:30 2022
-    Info: Elapsed time: 00:00:50
-    Info: Total CPU time (on all processors): 00:01:30
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 75 warnings
+    Info: Peak virtual memory: 4835 megabytes
+    Info: Processing ended: Mon Jun 06 14:27:00 2022
+    Info: Elapsed time: 00:00:49
+    Info: Total CPU time (on all processors): 00:01:28
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/admin/Desktop/simple/output_files/simple.map.smsg.
+The suppressed messages can be found in C:/Users/admin/2022-simple-team04/simple/output_files/simple.map.smsg.
 
 

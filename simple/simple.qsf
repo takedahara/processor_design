@@ -98,30 +98,6 @@ set_location_assignment PIN_AA9 -to seg_out[2]
 set_location_assignment PIN_U10 -to seg_out[1]
 set_location_assignment PIN_T9 -to seg_out[0]
 set_location_assignment PIN_V16 -to seg_sel
-set_global_assignment -name VERILOG_FILE "../../2022-simple-team04/displaydigit.v"
-set_global_assignment -name VERILOG_FILE "../../2022-simple-team04/seven.v"
-set_global_assignment -name VERILOG_FILE ../multiplexer_16/multiplexer_16.v
-set_global_assignment -name VERILOG_FILE ../hanyouregister_16/demultiplex.v
-set_global_assignment -name VERILOG_FILE ../register_16/register_16.v
-set_global_assignment -name VERILOG_FILE ../ram/ram.v
-set_global_assignment -name VERILOG_FILE ../program_counter/program_counter.v
-set_global_assignment -name VERILOG_FILE ../control/control.v
-set_global_assignment -name VERILOG_FILE ../alu/alu.v
-set_global_assignment -name VERILOG_FILE ../Add/Add.v
-set_global_assignment -name VERILOG_FILE simple.v
-set_global_assignment -name VERILOG_FILE register_general.v
-set_global_assignment -name VERILOG_FILE alu_control_unit.v
-set_global_assignment -name VERILOG_FILE sign_extension.v
-set_global_assignment -name VERILOG_FILE multi3.v
-set_global_assignment -name VERILOG_FILE multiplexer_16.v
-set_global_assignment -name VERILOG_FILE ../register_16/register_16_new.v
-set_global_assignment -name QIP_FILE ram01.qip
-set_global_assignment -name MIF_FILE ram01.mif
-set_global_assignment -name MIF_FILE simple.mif
-set_global_assignment -name MIF_FILE Mif1.mif
-set_global_assignment -name QIP_FILE ram02.qip
-set_global_assignment -name MIF_FILE output_files/Mif2.mif
-set_global_assignment -name MIF_FILE Mif2.mif
 set_location_assignment PIN_A10 -to in[15]
 set_location_assignment PIN_B10 -to in[14]
 set_location_assignment PIN_C10 -to in[13]
@@ -138,8 +114,6 @@ set_location_assignment PIN_C13 -to in[3]
 set_location_assignment PIN_D13 -to in[2]
 set_location_assignment PIN_E13 -to in[1]
 set_location_assignment PIN_F13 -to in[0]
-set_global_assignment -name VERILOG_FILE szcv_register.v
-set_global_assignment -name VERILOG_FILE output_files/sign_ext_im.v
 set_location_assignment PIN_V13 -to seg_out_2[31]
 set_location_assignment PIN_V12 -to seg_out_2[30]
 set_location_assignment PIN_U13 -to seg_out_2[29]
@@ -172,7 +146,6 @@ set_location_assignment PIN_T16 -to seg_out_2[3]
 set_location_assignment PIN_AA15 -to seg_out_2[2]
 set_location_assignment PIN_R16 -to seg_out_2[1]
 set_location_assignment PIN_U15 -to seg_out_2[0]
-set_global_assignment -name VERILOG_FILE SEG_SEL.v
 set_location_assignment PIN_AA17 -to seg_sel_1
 set_location_assignment PIN_W17 -to seg_sel_2
 set_location_assignment PIN_AB17 -to seg_sel_3
@@ -183,4 +156,35 @@ set_location_assignment PIN_AA19 -to seg_sel_7
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VERILOG_FILE ../control.v
+set_global_assignment -name VERILOG_FILE ../program_counter.v
+set_global_assignment -name VERILOG_FILE ../alu.v
+set_global_assignment -name VERILOG_FILE ../register_16.v
+set_global_assignment -name VERILOG_FILE "../../2022-simple-team04/displaydigit.v"
+set_global_assignment -name VERILOG_FILE "../../2022-simple-team04/seven.v"
+set_global_assignment -name VERILOG_FILE ../multiplexer_16/multiplexer_16.v
+set_global_assignment -name VERILOG_FILE ../hanyouregister_16/demultiplex.v
+set_global_assignment -name VERILOG_FILE ../register_16/register_16.v
+set_global_assignment -name VERILOG_FILE ../ram/ram.v
+set_global_assignment -name VERILOG_FILE ../program_counter/program_counter.v
+set_global_assignment -name VERILOG_FILE ../control/control.v
+set_global_assignment -name VERILOG_FILE ../alu/alu.v
+set_global_assignment -name VERILOG_FILE ../Add/Add.v
+set_global_assignment -name VERILOG_FILE simple.v
+set_global_assignment -name VERILOG_FILE register_general.v
+set_global_assignment -name VERILOG_FILE alu_control_unit.v
+set_global_assignment -name VERILOG_FILE sign_extension.v
+set_global_assignment -name VERILOG_FILE multi3.v
+set_global_assignment -name VERILOG_FILE multiplexer_16.v
+set_global_assignment -name VERILOG_FILE ../register_16/register_16_new.v
+set_global_assignment -name QIP_FILE ram01.qip
+set_global_assignment -name MIF_FILE ram01.mif
+set_global_assignment -name MIF_FILE simple.mif
+set_global_assignment -name MIF_FILE Mif1.mif
+set_global_assignment -name QIP_FILE ram02.qip
+set_global_assignment -name MIF_FILE output_files/Mif2.mif
+set_global_assignment -name MIF_FILE Mif2.mif
+set_global_assignment -name VERILOG_FILE szcv_register.v
+set_global_assignment -name VERILOG_FILE output_files/sign_ext_im.v
+set_global_assignment -name VERILOG_FILE SEG_SEL.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

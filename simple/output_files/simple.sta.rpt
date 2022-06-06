@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for simple
-Mon Jun 06 13:39:02 2022
+Mon Jun 06 14:27:32 2022
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -115,12 +115,12 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.09        ;
+; Average used               ; 1.10        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   9.4%      ;
+;     Processor 2            ;   9.5%      ;
 +----------------------------+-------------+
 
 
@@ -129,7 +129,7 @@ refer to the applicable agreement for further details.
 +---------------+--------+--------------------------+
 ; SDC File Path ; Status ; Read at                  ;
 +---------------+--------+--------------------------+
-; simple.sdc    ; OK     ; Mon Jun 06 13:38:59 2022 ;
+; simple.sdc    ; OK     ; Mon Jun 06 14:27:29 2022 ;
 +---------------+--------+--------------------------+
 
 
@@ -1181,8 +1181,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 ; 7.442 ; register_general:registerfile|reg_array[4][15] ; seg_out_2[26] ; clock        ; clock       ; 20.000       ; -2.349     ; 10.209     ;
 ; 7.443 ; register_general:registerfile|reg_array[0][15] ; seg_out_2[26] ; clock        ; clock       ; 20.000       ; -2.351     ; 10.206     ;
 ; 7.452 ; register_16:IR|reg_out[13]                     ; seg_out[28]   ; clock        ; clock       ; 20.000       ; -2.341     ; 10.207     ;
-; 7.455 ; register_16:IR|reg_out[8]                      ; seg_out_2[5]  ; clock        ; clock       ; 20.000       ; -2.352     ; 10.193     ;
 ; 7.455 ; register_16:IR|reg_out[14]                     ; seg_out[28]   ; clock        ; clock       ; 20.000       ; -2.341     ; 10.204     ;
+; 7.455 ; register_16:IR|reg_out[8]                      ; seg_out_2[5]  ; clock        ; clock       ; 20.000       ; -2.352     ; 10.193     ;
 ; 7.469 ; register_16:IR|reg_out[9]                      ; seg_out_2[19] ; clock        ; clock       ; 20.000       ; -2.352     ; 10.179     ;
 ; 7.534 ; register_general:registerfile|reg_array[2][15] ; seg_out_2[26] ; clock        ; clock       ; 20.000       ; -2.351     ; 10.115     ;
 ; 7.557 ; register_16:IR|reg_out[10]                     ; seg_out[28]   ; clock        ; clock       ; 20.000       ; -2.341     ; 10.102     ;
@@ -1248,8 +1248,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 ; 8.097 ; register_general:registerfile|reg_array[3][15] ; seg_out_2[26] ; clock        ; clock       ; 20.000       ; -2.346     ; 9.557      ;
 ; 8.108 ; register_16:IR|reg_out[11]                     ; seg_out[19]   ; clock        ; clock       ; 20.000       ; -2.352     ; 9.540      ;
 ; 8.115 ; register_16:IR|reg_out[8]                      ; seg_out_2[28] ; clock        ; clock       ; 20.000       ; -2.352     ; 9.533      ;
-; 8.116 ; register_16:IR|reg_out[7]                      ; seg_out[28]   ; clock        ; clock       ; 20.000       ; -2.356     ; 9.528      ;
 ; 8.116 ; szcv_register:szcv_regi|reg_out[0]             ; seg_out[15]   ; clock        ; clock       ; 20.000       ; -2.341     ; 9.543      ;
+; 8.116 ; register_16:IR|reg_out[7]                      ; seg_out[28]   ; clock        ; clock       ; 20.000       ; -2.356     ; 9.528      ;
 ; 8.121 ; szcv_register:szcv_regi|reg_out[0]             ; seg_out_2[10] ; clock        ; clock       ; 20.000       ; -2.341     ; 9.538      ;
 ; 8.126 ; register_general:registerfile|reg_array[1][0]  ; seg_out_2[5]  ; clock        ; clock       ; 20.000       ; -2.341     ; 9.533      ;
 +-------+------------------------------------------------+---------------+--------------+-------------+--------------+------------+------------+
@@ -3750,7 +3750,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime TimeQuest Timing Analyzer
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Mon Jun 06 13:38:56 2022
+    Info: Processing started: Mon Jun 06 14:27:26 2022
 Info: Command: quartus_sta simple -c simple
 Info: qsta_default_script.tcl version: #3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -3890,7 +3890,7 @@ Info (332101): Design is fully constrained for setup requirements
 Info (332101): Design is fully constrained for hold requirements
 Info: Quartus Prime TimeQuest Timing Analyzer was successful. 0 errors, 2 warnings
     Info: Peak virtual memory: 4779 megabytes
-    Info: Processing ended: Mon Jun 06 13:39:02 2022
+    Info: Processing ended: Mon Jun 06 14:27:32 2022
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:06
 
