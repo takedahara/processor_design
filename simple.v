@@ -38,7 +38,7 @@ seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	wire[15:0] m3;
 	wire[15:0] m4;
 	wire[15:0] m5;
-	wire[15:0] m6;
+	
 	wire[15:0] m7;
 	wire[15:0] m8;
 	wire[15:0] m9;
@@ -133,10 +133,10 @@ seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	end	
 	control controls(.phase(phase),.S(Flag[3]),.Z(Flag[2]),.C(Flag[1]),
 	.V(Flag[0]),.instruction(ir),.aluc_e(aluc_e),.ar_e(ar_e)
-	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.reg_e(reg_e),.genr_w(genr_w)
+	,.br_e(br_e),.dr_e(dr_e),.mdr_e(mdr_e),.ir_e(ir_e),.genr_w(genr_w)
 	,.mem_e(mem_e)
 	,.mem_w(mem_w),.jump(jump) ,.m2_s(m2_s),.m3_s(m3_s),.m4_s(m4_s)
-	,.m5_s(m5_s),.m6_s(m6_s),.m7_s(m7_s),.m8_s(m8_s),.m9_s(m9_s),.out_s(out_s),.hlt(hlt),.szcv_s(szcv_s),.
+	,.m5_s(m5_s),.m7_s(m7_s),.m8_s(m8_s),.m9_s(m9_s),.out_s(out_s),.hlt(hlt),.szcv_s(szcv_s),.
 	alu_instruction(alu_instruction));
 	//MEI wo ir nikaeta
 	
@@ -145,11 +145,11 @@ seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	 
 	seven sev2(.in(m10),.signal(out_s),.out(seg_out_2));
 	
-	SEG_SEL(.in(ir[3:1]),.seg_sel(seg_sel),.seg_sel_1(seg_sel_1),.seg_sel_2(seg_sel_2)
+	SEG_SEL seg_SEL(.in(ir[3:1]),.seg_sel(seg_sel),.seg_sel_1(seg_sel_1),.seg_sel_2(seg_sel_2)
 	,.seg_sel_3(seg_sel_3),.seg_sel_4(seg_sel_4),.seg_sel_5(seg_sel_5),.seg_sel_6(seg_sel_6)
 	,.seg_sel_7(seg_sel_7));
 	
-	szcv_register(.reg_e(clk),.reg_write_en(szcv_s),.reg_in({S,Z,C,V}),.reg_out(Flag));
+	szcv_register szcv_regi(.reg_e(clk),.reg_write_en(szcv_s),.reg_in({S,Z,C,V}),.reg_out(Flag));
 	
 	
 	register_16 IR(.reg_e(clk), .reg_write_en(ir_e), .reg_in(mem_out1) //MEI wo mem_out1
@@ -196,7 +196,7 @@ seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	
 	sign_extension siex(.d(ir[7:0]),.result(exd)); //ir[7:0] wo 8'b00001111
 	
-	sign_ext_im(.d(ir[7:0]),.result(exd_im));
+	sign_ext_im sign_ext_IM(.d({{ir[13:11]},{ir[7:0]}}),.result(exd_im));
 	
 	
 	multiplexer_16 m2_0(.mux_s(m2_s),.mux_in_a(re0),.mux_in_b(exd)
@@ -211,8 +211,7 @@ seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	multiplexer_16 m5_0(.mux_s(m5_s),.mux_in_a(ir[13:11]),.mux_in_b(ir[10:8]) //MEI wo ir nisita
 	,.mux_out(m5));
 	
-	multiplexer_16 m6_0(.mux_s(m6_s),.mux_in_a(pc),.mux_in_b(dr)
-	,.mux_out(m6));
+	
 	
 	multiplexer_16 m7_0(.mux_s(m7_s),.mux_in_a(mem_out2),.mux_in_b(in)
 	,.mux_out(m7));
@@ -222,7 +221,7 @@ seg_sel_2,seg_sel_3,seg_sel_4,seg_sel_5,seg_sel_6,seg_sel_7, phase);
 	
 	multiplexer_16 m9_0(.mux_s(m9_s),.mux_in_a(m2),.mux_in_b(exd_im),.mux_out(m9));
 	
-	multiplexer_16 m10_0(.mux_s(ir[10]),.mux_in_a(16'b0000000000000000),.mux_in_b(re1),.mux_out(m10));
+	multiplexer_16 m10_0(.mux_s(ir[0]),.mux_in_a(16'b0000000000000000),.mux_in_b(re1),.mux_out(m10));
 
 	assign out=mem_out1;
 	assign out2=pc_out; //br wo re1

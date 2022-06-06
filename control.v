@@ -5,21 +5,21 @@ module control(phase,
 				instruction,
 				aluc_e,
 				ar_e,br_e,dr_e,mdr_e,ir_e, // enablers
-                reg_e, // signal for all non-general registers --> 同期
+               
 				genr_w,
 				//pc_e,
 				mem_e, mem_w,
-				jump,m2_s,m3_s,m4_s,m5_s, m6_s, m7_s, m8_s,m9_s,out_s,hlt,szcv_s,
+				jump,m2_s,m3_s,m4_s,m5_s, m7_s, m8_s,m9_s,out_s,hlt,szcv_s,
                 alu_instruction);
    input [2:0] phase;
 	input S, Z, C, V;
 	input [15:0] instruction;
 	output reg	aluc_e,
 				ar_e,br_e,dr_e,mdr_e,ir_e, 
-                reg_e,
+                
 				genr_w, 
 				mem_e, mem_w, 
-				jump,m2_s,m3_s,m4_s, m5_s, m6_s, m7_s, m8_s,m9_s,out_s,szcv_s;
+				jump,m2_s,m3_s,m4_s, m5_s, m7_s, m8_s,m9_s,out_s,szcv_s;
     output reg hlt;
 	output [5:0] alu_instruction; // ALU制御部へ
 	 
@@ -133,12 +133,7 @@ module control(phase,
             ir_e <= 1;
         end
 
-        // the clock for all the registers
-        if(phase==3'b000 || command==5'b01111) begin
-            reg_e <= 0;
-        end else begin
-            reg_e <= 1;
-        end
+        
 
         // memory read
         if(phase==3'b000 || command==5'b00101 || command==5'b00110 || command==5'b01111) begin
@@ -188,12 +183,8 @@ module control(phase,
             m5_s <= 1;
         end
         
-        // mux6 selector
-        if(command==5'b10001) begin
-            m6_s <= 1;
-        end else begin
-            m6_s <= 0;
-        end
+       
+        
 
         // mux7 selector
         if(command==5'b01100) begin

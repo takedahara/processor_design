@@ -17,7 +17,7 @@ module program_counter(clock, rst,j_flag,j_addr,phase,  pc_out);
 		
 		end
 		else begin
-			if(phase==3'b101)begin
+			if(phase==3'b100)begin  //100 wo 011
 				if(j_flag==1)begin
 					pc_out<=j_addr+16'b0000000000000001; //j_addr ha PC+ext_d nanode +1 gahituyou
 				end
