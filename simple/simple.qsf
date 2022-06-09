@@ -162,13 +162,8 @@ set_global_assignment -name VERILOG_FILE ../alu.v
 set_global_assignment -name VERILOG_FILE ../register_16.v
 set_global_assignment -name VERILOG_FILE "../../2022-simple-team04/displaydigit.v"
 set_global_assignment -name VERILOG_FILE "../../2022-simple-team04/seven.v"
-set_global_assignment -name VERILOG_FILE ../multiplexer_16/multiplexer_16.v
 set_global_assignment -name VERILOG_FILE ../hanyouregister_16/demultiplex.v
-set_global_assignment -name VERILOG_FILE ../register_16/register_16.v
 set_global_assignment -name VERILOG_FILE ../ram/ram.v
-set_global_assignment -name VERILOG_FILE ../program_counter/program_counter.v
-set_global_assignment -name VERILOG_FILE ../control/control.v
-set_global_assignment -name VERILOG_FILE ../alu/alu.v
 set_global_assignment -name VERILOG_FILE ../Add/Add.v
 set_global_assignment -name VERILOG_FILE simple.v
 set_global_assignment -name VERILOG_FILE register_general.v
